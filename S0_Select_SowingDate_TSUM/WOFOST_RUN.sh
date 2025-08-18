@@ -17,24 +17,24 @@ module load netcdf
 #----------------------------Run WOFOST simulations-----------------------
 # echo "Current directory: $(pwd)"
 
-# Maize Maximum CycleLength = 150
-# ./wofost-Ave-Yp list_Rhine_maize_Yp.txt meteolist_WFDE5_Rhine_maize.txt 
-# ./wofost-Ave-Yp list_Indus_maize_Yp.txt meteolist_WFDE5_Indus_maize.txt 
-# ./wofost-Ave-Yp list_LaPlata_maize_Yp.txt meteolist_WFDE5_LaPlata_maize.txt 
-# ./wofost-Ave-Yp list_Yangtze_maize_Yp.txt meteolist_WFDE5_Yangtze_maize.txt 
+# Maize Maximum CycleLength = 160
+# ./wofost-S0-maize list_Rhine_maize.txt meteolist_WFDE5_Rhine_maize.txt 
+# ./wofost-S0-maize list_LaPlata_maize.txt meteolist_WFDE5_LaPlata_maize.txt 
+# ./wofost-S0-maize list_Yangtze_maize.txt meteolist_WFDE5_Yangtze_maize.txt 
+# ./wofost-S0-maize list_Indus_maize.txt meteolist_WFDE5_Indus_maize.txt 
 
 # Rice Maximum CycleLength = 180
-./wofost-Ave-Yp list_Indus_mainrice.txt meteolist_WFDE5_Indus_mainrice.txt 
-./wofost-Ave-Yp list_LaPlata_mainrice.txt meteolist_WFDE5_LaPlata_mainrice.txt 
-./wofost-Ave-Yp list_Yangtze_mainrice.txt meteolist_WFDE5_Yangtze_mainrice.txt 
-./wofost-Ave-Yp list_Yangtze_secondrice.txt meteolist_WFDE5_Yangtze_secondrice.txt 
+# ./wofost-S0-mainrice list_Rhine_mainrice.txt meteolist_WFDE5_Rhine_mainrice.txt 
+# ./wofost-S0-mainrice list_LaPlata_mainrice.txt meteolist_WFDE5_LaPlata_mainrice.txt 
+# ./wofost-S0-mainrice list_Yangtze_mainrice.txt meteolist_WFDE5_Yangtze_mainrice.txt 
+# ./wofost-S0-mainrice list_Yangtze_secondrice.txt meteolist_WFDE5_Yangtze_secondrice.txt 
 
-# Wheat Maximum CycleLength = 300
-# ./wofost-Ave-Yp list_Yangtze_winterwheat_Yp.txt meteolist_WFDE5_Yangtze_winterwheat.txt 
-# ./wofost-Ave-Yp list_Rhine_winterwheat_Yp.txt meteolist_WFDE5_Rhine_winterwheat.txt 
-# ./wofost-Ave-Yp list_Indus_winterwheat_Yp.txt meteolist_WFDE5_Indus_winterwheat.txt 
-# ./wofost-Ave-Yp list_LaPlata_winterwheat_Yp.txt meteolist_WFDE5_LaPlata_winterwheat.txt 
+# Wheat Maximum CycleLength = 270
+# ./wofost-S0-winterwheat list_Rhine_wheat.txt meteolist_WFDE5_Rhine_wheat.txt 
+# ./wofost-S0-winterwheat list_LaPlata_wheat.txt meteolist_WFDE5_LaPlata_wheat.txt 
+# ./wofost-S0-winterwheat list_Yangtze_wheat.txt meteolist_WFDE5_Yangtze_wheat.txt 
+# ./wofost-S0-winterwheat list_Indus_wheat.txt meteolist_WFDE5_Indus_wheat.txt 
 
-# Soybean CycleLength = 140
-# ./wofost-Ave-Yp list_Yangtze_soybean_Yp.txt meteolist_WFDE5_Yangtze_soybean.txt 
-# ./wofost-Ave-Yp list_LaPlata_soybean_Yp.txt meteolist_WFDE5_LaPlata_soybean.txt 
+# Soybean CycleLength = 150
+# ./wofost-S0-msoybean list_Yangtze_soybean.txt meteolist_WFDE5_Yangtze_soybean.txt 
+# ./wofost-S0-msoybean list_LaPlata_soybean.txt meteolist_WFDE5_LaPlata_soybean.txt 

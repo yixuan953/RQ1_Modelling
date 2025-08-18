@@ -19,8 +19,12 @@ void Growth(float NewPlantMaterial)
      
     /* Water stress is more severe as compared to Nitrogen stress and */
     /* partitioning will follow the original assumptions of LINTUL2   */     
-        
-    Translocation = 0.;
+    if (Crop->prm.N_fixation == 0.0){
+       Translocation = 0.2; // For cereals
+    } else {
+       Translocation = 0.0; // For soybean
+    }   
+    
     Translocation_st = 0.;
     Translocation_dst = 0.;
     if (Crop->st.Development >= 1.)
