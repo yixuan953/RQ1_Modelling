@@ -24,10 +24,10 @@ module load netcdf
 # ./wofost-S0-maize list_Indus_maize.txt meteolist_WFDE5_Indus_maize.txt 
 
 # Rice Maximum CycleLength = 180
-# ./wofost-S0-rice list_Rhine_mainrice.txt meteolist_WFDE5_Rhine_mainrice.txt 
-# ./wofost-S0-rice list_LaPlata_mainrice.txt meteolist_WFDE5_LaPlata_mainrice.txt 
-# ./wofost-S0-rice list_Yangtze_mainrice.txt meteolist_WFDE5_Yangtze_mainrice.txt 
-# ./wofost-S0-rice list_Yangtze_secondrice.txt meteolist_WFDE5_Yangtze_secondrice.txt 
+./wofost-S0-rice list_Rhine_mainrice.txt meteolist_WFDE5_Rhine_mainrice.txt 
+./wofost-S0-rice list_LaPlata_mainrice.txt meteolist_WFDE5_LaPlata_mainrice.txt 
+./wofost-S0-rice list_Yangtze_mainrice.txt meteolist_WFDE5_Yangtze_mainrice.txt 
+./wofost-S0-rice list_Yangtze_secondrice.txt meteolist_WFDE5_Yangtze_secondrice.txt 
 
 # Wheat Maximum CycleLength = 270
 # ./wofost-S0-winterwheat list_Rhine_wheat.txt meteolist_WFDE5_Rhine_wheat.txt 
@@ -36,5 +36,5 @@ module load netcdf
 # ./wofost-S0-winterwheat list_Indus_wheat.txt meteolist_WFDE5_Indus_wheat.txt 
 
 # Soybean CycleLength = 150
-./wofost-S0-soybean list_Yangtze_soybean.txt meteolist_WFDE5_Yangtze_soybean.txt 
-./wofost-S0-soybean list_LaPlata_soybean.txt meteolist_WFDE5_LaPlata_soybean.txt 
+# ./wofost-S0-soybean list_Yangtze_soybean.txt meteolist_WFDE5_Yangtze_soybean.txt 
+# ./wofost-S0-soybean list_LaPlata_soybean.txt meteolist_WFDE5_LaPlata_soybean.txt 

@@ -87,7 +87,7 @@ int GetMeteoData(Weather* meteo)
     }
     
     // allocate mask
-    if ((retval = nc_inq_varid(ncid, "HA", &varid)))
+    if ((retval = nc_inq_varid(ncid, "mask", &varid)))
         ERR(retval);
     Mask = malloc(lon_length * sizeof(*Mask));
     if(Mask == NULL){
@@ -275,7 +275,7 @@ int GetMeteoData(Weather* meteo)
             ERR(retval);
         for (k = 0; k < lat_length; k++) {
             for (j = 0; j < lon_length; j++) {
-                if (Mask[j][k] >= 250.0) {
+                if (Mask[j][k] == 1) {
                     for (l = 0; l < time_length; l++) {
                         (*variable)[j][k][l] = 
                                 data[l * lon_length * lat_length + k * lon_length + j];
@@ -311,7 +311,7 @@ int GetMeteoData(Weather* meteo)
             exit(1); 
         }
         for (k = 0; k < lat_length; k++) {
-            if (Mask[j][k] >= 250.0) {
+            if (Mask[j][k] == 1) {
                 AngstA[j][k] = 0.4885 - 0.0052 * Latitude[k];
                 AngstB[j][k] =  0.1563 + 0.0074 * Longitude[k];
                 // TODO: temporary needs to be fixed
@@ -328,7 +328,7 @@ int GetMeteoData(Weather* meteo)
     // adjust data
     for (j = 0; j < lon_length; j++) {
         for (k = 0; k < lat_length; k++) {
-            if (Mask[j][k] >= 250.0) {
+            if (Mask[j][k] == 1) {
             for (l = 0; l < time_length; l++) {
                 Tmin[j][k][l] = roundz(Tmin[j][k][l], 1); // [degree C]
                 Tmax[j][k][l] = roundz(Tmax[j][k][l], 1); // [degree C]

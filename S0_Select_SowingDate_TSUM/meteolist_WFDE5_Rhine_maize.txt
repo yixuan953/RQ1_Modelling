@@ -1,4 +1,4 @@
-/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/Meteo/ 1981 2019 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/Mask/wintermaize_mask.nc
+/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/Meteo/ 1981 2019 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/range.nc
 Tmin_daily.nc  TMIN tasmin
 Tmax_daily.nc  TMAX tasmax
 SWdown_daily.nc  RADIATION SWdown
