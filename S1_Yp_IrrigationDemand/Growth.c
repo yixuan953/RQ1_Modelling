@@ -25,9 +25,10 @@ void Growth(float NewPlantMaterial)
     } else {
         FRTRL = 0.0; // For soybean
     }   
-    
+    Translocation = 0.;
     Translocation_st = 0.;
     Translocation_dst = 0.;
+
     if (Crop->st.Development >= 1.)
     {
         Translocation_st  = Crop->st.stems * Crop->rt.Development * FRTRL;
