@@ -1,0 +1,5 @@
+remove netcdf 4.6.1 (GCC) library and binaries.
+remove Scientific Linux 7 libraries.
+load netcdf 4.6.1 (GCC) library and binaries.
+load Scientific Linux 7 libraries.
+/shared/apps/slurm/var/spool/node203/job61169896/slurm_script: line 27: ./wofost-S0-rice: No such file or directory

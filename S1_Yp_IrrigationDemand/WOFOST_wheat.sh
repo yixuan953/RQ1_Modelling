@@ -30,10 +30,10 @@ echo "Current directory: $(pwd)"
 # ./wofost-S1-rice list_Yangtze_secondrice.txt meteolist_WFDE5_Yangtze_secondrice.txt 
 
 # Wheat Maximum CycleLength = 270
-./wofost-S1-winterwheat list_Rhine_wheat.txt meteolist_WFDE5_Rhine_wheat.txt 
+# ./wofost-S1-winterwheat list_Rhine_wheat.txt meteolist_WFDE5_Rhine_wheat.txt 
 ./wofost-S1-winterwheat list_LaPlata_wheat.txt meteolist_WFDE5_LaPlata_wheat.txt 
-./wofost-S1-winterwheat list_Yangtze_wheat.txt meteolist_WFDE5_Yangtze_wheat.txt 
-./wofost-S1-winterwheat list_Indus_wheat.txt meteolist_WFDE5_Indus_wheat.txt 
+# ./wofost-S1-winterwheat list_Yangtze_wheat.txt meteolist_WFDE5_Yangtze_wheat.txt 
+# ./wofost-S1-winterwheat list_Indus_wheat.txt meteolist_WFDE5_Indus_wheat.txt 
 
 # Soybean CycleLength = 150
 # ./wofost-S1-soybean list_Yangtze_soybean.txt meteolist_WFDE5_Yangtze_soybean.txt 

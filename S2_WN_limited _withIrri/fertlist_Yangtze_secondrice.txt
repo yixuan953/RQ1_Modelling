@@ -1,0 +1,8 @@
+/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Fertilization/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Mask/Yangtze_secondrice_mask.nc
+Yangtze_Rice_Fert_1981-2016.nc  RESRATIO Return_Ratio
+Yangtze_Rice_Fert_1981-2016.nc  P_INORG P_application_rate
+Yangtze_Rice_Fert_1981-2016.nc  P_MANURE Manure_P_application_rate
+Yangtze_Rice_Fert_1981-2016.nc  N_OTHERINOG Inorg_N_application_rate
+Yangtze_Rice_Fert_1981-2016.nc  N_UREA Urea_inorg_N_appRate
+Yangtze_Rice_Fert_1981-2016.nc  N_MANURE Manure_N_application_rate
+Yangtze_Rice_Fert_1981-2016.nc  EFNOX EF_NOx

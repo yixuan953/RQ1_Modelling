@@ -1,0 +1,3 @@
+Saved combined mask: /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Indus/Mask/Indus_mainrice_mask.nc
+Cannot map Indus_Wheat_MaxAvg.nc to any logical crop
+Cannot map Indus_Maize_MaxAvg.nc to any logical crop
