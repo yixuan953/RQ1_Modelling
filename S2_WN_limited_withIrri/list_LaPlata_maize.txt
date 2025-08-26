@@ -1,0 +1,1 @@
+/lustre/nobackup/WUR/ESG/zhou111/1_RQ1_Code/2_Modelling/Parameters/	Crop/maize_tropical.cab	Soil/ec3.new	Management/Yp_mg.dat	Site/NoTillage.site	09-25	0	/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/S2/LaPlata_maize_daily.csv	/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/S2/LaPlata_maize_annual.csv

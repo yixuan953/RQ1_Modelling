@@ -1,0 +1,10 @@
+remove netcdf 4.6.1 (GCC) library and binaries.
+remove Scientific Linux 7 libraries.
+load netcdf 4.6.1 (GCC) library and binaries.
+load Scientific Linux 7 libraries.
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
+Year mismatch: expected [1981 - 2016], got [1981 - 2018]
