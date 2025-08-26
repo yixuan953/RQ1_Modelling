@@ -1,8 +1,0 @@
-/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Fertilization/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Mask/LaPlata_maize_mask.nc
-LaPlata_Maize_Fert_1981-2016.nc  RESRATIO Return_Ratio
-LaPlata_Maize_Fert_1981-2016.nc  P_INORG P_application_rate
-LaPlata_Maize_Fert_1981-2016.nc  P_MANURE Manure_P_application_rate
-LaPlata_Maize_Fert_1981-2016.nc  N_OTHERINOG Inorg_N_application_rate
-LaPlata_Maize_Fert_1981-2016.nc  N_UREA Urea_inorg_N_appRate
-LaPlata_Maize_Fert_1981-2016.nc  N_MANURE Manure_N_application_rate
-LaPlata_Maize_Fert_1981-2016.nc  EFNOX EF_NOx
