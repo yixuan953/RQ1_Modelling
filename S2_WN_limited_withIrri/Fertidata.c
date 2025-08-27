@@ -293,26 +293,41 @@ int GetFertData(Nutri* Fert)
     
     
     // adjust data
-    for (j = 0; j < lon_length; j++) {
-        for (k = 0; k < lat_length; k++) {
-            if (!isnan(Sow_date[j][k])) {
-                for (l = 0; l < time_length; l++) {
-                    EF_NOx[j][k][l] = roundz(EF_NOx[j][k][l], 1); // [-]
-                    Res_return_ratio[j][k][l] = roundz(Res_return_ratio[j][k][l], 1); // [-]
-                    Manure_N_appRate[j][k][l] = roundz(Manure_N_appRate[j][k][l], 1); // [kg/ha]
-                    Manure_P_appRate[j][k][l] = roundz(Manure_P_appRate[j][k][l], 1); // [kg/ha]
-                    Urea_inorg_N_appRate[j][k][l] = roundz(Urea_inorg_N_appRate[j][k][l], 1); // [kg/ha]
-                    Other_inorg_N_appRate[j][k][l] = roundz(Other_inorg_N_appRate[j][k][l], 1); // [kg/ha]
-                    Inorg_P_appRate[j][k][l] = roundz(Inorg_P_appRate[j][k][l], 1); // [kg/ha]
+    // for (j = 0; j < lon_length; j++) {
+    //     for (k = 0; k < lat_length; k++) {
+    //         if (!isnan(Sow_date[j][k])) {
+    //             for (l = 0; l < time_length; l++) {
+    //                 EF_NOx[j][k][l] = roundz(EF_NOx[j][k][l], 1); // [-]
+    //                 Res_return_ratio[j][k][l] = roundz(Res_return_ratio[j][k][l], 1); // [-]
+    //                 Manure_N_appRate[j][k][l] = roundz(Manure_N_appRate[j][k][l], 1); // [kg/ha]
+    //                 Manure_P_appRate[j][k][l] = roundz(Manure_P_appRate[j][k][l], 1); // [kg/ha]
+    //                 Urea_inorg_N_appRate[j][k][l] = roundz(Urea_inorg_N_appRate[j][k][l], 1); // [kg/ha]
+    //                 Other_inorg_N_appRate[j][k][l] = roundz(Other_inorg_N_appRate[j][k][l], 1); // [kg/ha]
+    //                 Inorg_P_appRate[j][k][l] = roundz(Inorg_P_appRate[j][k][l], 1); // [kg/ha]
 
-                    // Check if the fertilization data is written correctly
-                    // printf("%3d %3d %3d %5.2f %5.2f %5.2f\n", j, k, l, Urea_inorg_N_appRate[j][k][l], Latitude[k], Longitude[j]);
-                    }
+    //                 // Check if the fertilization data is written correctly
+    //                 // printf("%3d %3d %3d %5.2f %5.2f %5.2f\n", j, k, l, Urea_inorg_N_appRate[j][k][l], Latitude[k], Longitude[j]);
+    //                 }
+    //         }
+    //     }
+    // }
+
+    // I replaced NAN with 0
+    for (j = 0; j < lon_length; j++) { 
+        for (k = 0; k < lat_length; k++) {
+            for (l = 0; l < time_length; l++) {
+
+                EF_NOx[j][k][l] = isnan(EF_NOx[j][k][l]) ? 0.0 : roundz(EF_NOx[j][k][l], 1);
+                Res_return_ratio[j][k][l] = isnan(Res_return_ratio[j][k][l]) ? 0.0 : roundz(Res_return_ratio[j][k][l], 1);
+                Manure_N_appRate[j][k][l] = isnan(Manure_N_appRate[j][k][l]) ? 0.0 : roundz(Manure_N_appRate[j][k][l], 1);
+                Manure_P_appRate[j][k][l] = isnan(Manure_P_appRate[j][k][l]) ? 0.0 : roundz(Manure_P_appRate[j][k][l], 1);
+                Urea_inorg_N_appRate[j][k][l] = isnan(Urea_inorg_N_appRate[j][k][l]) ? 0.0 : roundz(Urea_inorg_N_appRate[j][k][l], 1);
+                Other_inorg_N_appRate[j][k][l] = isnan(Other_inorg_N_appRate[j][k][l]) ? 0.0 : roundz(Other_inorg_N_appRate[j][k][l], 1);
+                Inorg_P_appRate[j][k][l] = isnan(Inorg_P_appRate[j][k][l]) ? 0.0 : roundz(Inorg_P_appRate[j][k][l], 1);
+
             }
         }
     }
-
-
 
     return 1;
 }

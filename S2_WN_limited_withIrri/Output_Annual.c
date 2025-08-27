@@ -14,7 +14,7 @@ void Output_Annual(FILE *fp_ao)
          fprintf(fp_ao,"%7.2f,%7.2f,%4d,%3d,"         // Lat, Lon, MeteoYear, MeteoDay
                 "%4.2f, %4.2d,"                       // Crop yield and GrowthDays
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // N inputs
-                "%4.2f, %4.2f, %4.2f, %4.2f,"         // N losses through gaseous emission
+                "%4.3f, %4.3f, %4.3f, %4.3f,"         // N losses through gaseous emission
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // N losses through water fluxes and uptakes 
                 "%4.2f, %4.2f, %4.2f,"                // P inputs
                 "%4.2f, %4.2f, %4.2f,"                // P pools
