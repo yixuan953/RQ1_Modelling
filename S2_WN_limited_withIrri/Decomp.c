@@ -34,16 +34,16 @@ void CalDecomp() {
     float m_temp;        // Modification factor for temperature
     float m_moisture;    // Modification factor for soil moisture
     float m_cover;       // Modification factor for soil cover
-    float k_rate = 0.05; // Decomposition rate [kg/ha per year]
+    float k_rate = 0.03; // Decomposition rate [kg/ha per year]
      
-    m_temp = 47.91 / (1.0 + exp(106.06 / (DayTemp + 18.27)));
+    m_temp = 47.91 / (1.0 + exp(106.06/(DayTemp + 18.27)));
 
     AccTSMD = max(min(WatBal->st.TSMD * 10, 0), MaxTSMD); // Then the units of both TSMD and MaxTSMD are both mm
 
     if (AccTSMD > 0.444 * MaxTSMD){
         m_moisture = 1.0;
     } else{
-        m_moisture = 0.2 + 0.8 * (MaxTSMD-AccTSMD) / (MaxTSMD - 0.444*MaxTSMD);
+        m_moisture = 0.2 + 0.8 * (MaxTSMD-AccTSMD)/(MaxTSMD - 0.444*MaxTSMD);
     }
 
     if (Crop->Sowing > 0 && Crop->Emergence == 1){

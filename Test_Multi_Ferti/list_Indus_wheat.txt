@@ -1,0 +1,1 @@
+/lustre/nobackup/WUR/ESG/zhou111/1_RQ1_Code/2_Modelling/Parameters/	Crop/wwh107.cab	Soil/ec3.new	Management/Yp_mg.dat	Site/NoTillage.site	10-15	0	/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/Test_Decomp_off/Indus_wheat_daily.csv	/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/Test_Decomp_off/Indus_wheat_annual.csv

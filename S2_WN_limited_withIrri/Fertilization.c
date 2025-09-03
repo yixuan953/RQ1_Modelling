@@ -71,12 +71,12 @@ void GetPFertInput()
 
     if (NPC->Fertilization == 1)
     {
-        if(isnan(Inorg_P_appRate[Lon][Lat][Crop->Seasons - 1])){
+        if(isnan(Inorg_P_appRate[Lon][Lat][Crop->Seasons-1])){
             InorgPInput = 0.0;} 
             else{
                 InorgPInput = Inorg_P_appRate[Lon][Lat][Crop->Seasons-1];
             }
-        if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons - 1])){
+        if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons-1])){
             ManurePInput= 0.0;} 
             else{
                 ManurePInput = Manure_P_appRate[Lon][Lat][Crop->Seasons-1];
@@ -108,7 +108,7 @@ void GetNFertInput()
     if (NPC->Fertilization == 1)
     {
 
-        if(isnan(Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons - 1])){
+        if(isnan(Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1])){
             Urea_N_input = 0.0;} 
             else{
                 Urea_N_input = Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1]*(1 - EF_NH3_Urea - EF_NOx[Lon][Lat][Crop->Seasons-1] - EF_N2O_Inorg - L_runoff_max * min(f_precip_surf,f_texture));

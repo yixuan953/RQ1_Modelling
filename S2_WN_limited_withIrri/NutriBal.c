@@ -38,7 +38,7 @@ void CalGaseousEmissions() {
                              Other_inorg_N_appRate[Lon][Lat][Crop->Seasons-1] * EF_NH3_Inorg +
                              Manure_N_appRate[Lon][Lat][Crop->Seasons-1] * EF_NH3_Manure;
     
-    NPC->n_st.Emission_NOx = (Manure_N_appRate[Lon][Lat][Crop->Seasons-1] + Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1] + Other_inorg_N_appRate[Lon][Lat][Crop->Seasons-1]) * EF_NOx[Lon][Lat][Crop->Seasons-1];
+    NPC->n_st.Emission_NOx = (Manure_N_appRate[Lon][Lat][Crop->Seasons-1] + Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1] + Other_inorg_N_appRate[Lon][Lat][Crop->Seasons-1])*EF_NOx[Lon][Lat][Crop->Seasons-1];
 
 }
 

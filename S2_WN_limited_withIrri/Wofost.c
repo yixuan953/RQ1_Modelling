@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     Green *wipe;             // 声明一个指向Green类型的指针，Green可能是一个用户定义的数据类型。
 
     // maize-160; wheat-270; rice-180; soybean-150
-    int CycleLength = 160; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
+    int CycleLength = 150; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
     int NumberOfFiles;     // 声明一个整型变量NumberOfFiles，可能用来存储文件的数量。
     int Emergence;         // 声明一个整型变量Emergence，其具体用途不明。
     int i;                 // 声明一个整型变量i，通常用作循环计数。
@@ -272,7 +272,7 @@ int main(int argc, char **argv)
                         DayTemp = 0.5 * (Tmax[Lon][Lat][Day] + Temp);
                         AveTemp += DayTemp/(Day+1);
 
-                        if (Day <1){
+                        if (Day <= 1){
 
                             CalSoilTexturePara();   // Calculate N, P cycling related parameters
 
@@ -409,8 +409,9 @@ int main(int argc, char **argv)
                                     // Initialize the precipitation surplus
                                     WatBal->st.PreSurplus = 0;
 
-                                    // Initialize the N balance and P losses after each cropping season
+                                    // Initialize the N balance, P losses and soil water moisture after each cropping season
                                     InitilizeNPBalance(); 
+                                    InitializeWatBal();    
 
                                     CalResidueInput();   // Using the residue N, P content in root, leaves and stems                                    
 

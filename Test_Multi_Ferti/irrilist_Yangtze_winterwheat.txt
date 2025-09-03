@@ -1,0 +1,2 @@
+/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Irrigation/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Mask/Yangtze_winterwheat_mask.nc
+Yangtze_winterwheat_monthly_Irri_Rate.nc  IRRIRATE Irrigation_Rate

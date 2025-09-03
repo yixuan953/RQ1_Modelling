@@ -1,0 +1,2 @@
+/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Indus/Irrigation/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Indus/Mask/Indus_winterwheat_mask.nc
+Indus_winterwheat_monthly_Irri_Rate.nc  IRRIRATE Irrigation_Rate
