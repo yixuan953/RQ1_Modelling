@@ -33,7 +33,7 @@ void IfFertilization(char* dateString)
             current_date.tm_mday == fert_date.tm_mday && 
             MeteoYear[Day] <= Meteo->EndYear)
             {
-                NPC->Fertilization = 1; 
+                NPC->Fertilization = 11; 
                 break;
             } 
     }
@@ -47,12 +47,12 @@ void IfFertilization(char* dateString)
             current_date.tm_mday == fert_date.tm_mday && 
             MeteoYear[Day] <= Meteo->EndYear)
             {
-                NPC->Fertilization = 2; 
+                NPC->Fertilization = 12; 
                 break;
             } 
     } 
 
-    for(int offset = 26; offset <= 85; offset++){
+    for(int offset = 26; offset <= 55; offset++){
         struct tm fert_date = sow_date; 
         fert_date.tm_mday += offset;
         mktime(&fert_date); // Normalize each time
@@ -61,7 +61,7 @@ void IfFertilization(char* dateString)
             current_date.tm_mday == fert_date.tm_mday && 
             MeteoYear[Day] <= Meteo->EndYear)
             {
-                NPC->Fertilization = 3; 
+                NPC->Fertilization = 13; 
                 break;
             } 
     }     
@@ -76,6 +76,43 @@ void IfFertilization(char* dateString)
 void IfMultiFertilization()
 {
 
+    if (Crop->st.Development >= 2.0 && Crop->Sowing == 0){
+
+        /* Record the date when crop is harvested */
+        struct tm harvest_date = {0};
+        harvest_date.tm_year = current_date.tm_year;
+        harvest_date.tm_mon = current_date.tm_mon;
+        harvest_date.tm_mday = current_date.tm_mday;
+        mktime(&harvest_date);
+
+        for(int offset = 0; offset <= 29; offset++){
+            struct tm fert_date = harvest_date; 
+            fert_date.tm_mday += offset;
+            mktime(&fert_date); // Normalize each time
+            if (current_date.tm_year == fert_date.tm_year && 
+                current_date.tm_mon == fert_date.tm_mon && 
+                current_date.tm_mday == fert_date.tm_mday && 
+                MeteoYear[Day] <= Meteo->EndYear)
+                {
+                    NPC->Fertilization = 21; 
+                    break;
+                } 
+        }
+        
+        for(int offset = 30; offset <= 59; offset++){
+            struct tm fert_date = harvest_date; 
+            fert_date.tm_mday += offset;
+            mktime(&fert_date); // Normalize each time
+            if (current_date.tm_year == fert_date.tm_year && 
+                current_date.tm_mon == fert_date.tm_mon && 
+                current_date.tm_mday == fert_date.tm_mday && 
+                MeteoYear[Day] <= Meteo->EndYear)
+                {
+                    NPC->Fertilization = 22; 
+                    break;
+                } 
+        }          
+    }
 }
 
 
@@ -108,40 +145,82 @@ void CalResidueInput(){
 
 void GetPFertInput()
 {
-    Org_frac = 0.5;
     float InorgPInput = 0.;
     float ManurePInput = 0.;
-    float OrgPInput = 0.;
+    float ResiduePInput = 0.;
+
+
+
+    float Prop_manure_decompPhase1 = 0.50;  // Proportion of components in manure that can be decomposed in one week
+    float Prop_manure_decompPhase2 = 0.15;  // Proportion of components in manure that can be decomposed in one month
+
+    float Prop_residue_decompPhase1 = 0.50; // Proportion of components in residue that can be decomposed in one week
+    float Prop_residue_decompPhase2 = 0.20; // Proportion of components in residue that can be decomposed in one month
+
     NPC->P_fert_input = 0.0;
 
-    if (NPC->Fertilization == 1)
+    if (NPC->Fertilization == 11)
     {
         if(isnan(Inorg_P_appRate[Lon][Lat][Crop->Seasons-1])){
             InorgPInput = 0.0;} 
             else{
                 InorgPInput = Inorg_P_appRate[Lon][Lat][Crop->Seasons-1];
             }
+        if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons-1])){
+            ManurePInput = 0.0;} 
+            else{
+                ManurePInput = Prop_manure_decompPhase1 * Manure_P_appRate[Lon][Lat][Crop->Seasons-1];
+            } 
         
-        InorgPInput = InorgPInput/7;
+        ResiduePInput = Prop_residue_decompPhase1 * NPC->P_residue_beforeSowing;
+            
+        NPC->P_fert_input = (InorgPInput + ManurePInput)/7 + ResiduePInput/30;     
     } 
+
+    else if (NPC->Fertilization == 12)
+    {
+        if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons-1])){
+            ManurePInput = 0.0;} 
+            else{
+                ManurePInput = Prop_manure_decompPhase2 * Manure_P_appRate[Lon][Lat][Crop->Seasons-1];
+            } 
+        
+        ResiduePInput = Prop_residue_decompPhase1 * NPC->P_residue_beforeSowing;
+            
+        NPC->P_fert_input = ManurePInput/53 + ResiduePInput/30;   
+    }
+
+    else if (NPC->Fertilization == 13)
+    {
+        if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons-1])){
+            ManurePInput = 0.0;} 
+            else{
+                ManurePInput = Prop_manure_decompPhase2 * Manure_P_appRate[Lon][Lat][Crop->Seasons-1];
+            } 
+        
+        ResiduePInput = Prop_residue_decompPhase2 * NPC->P_residue_beforeSowing;
+            
+        NPC->P_fert_input = ManurePInput/53 + ResiduePInput/30;   
+    }
+
+    else if (NPC->Fertilization == 21)
+    {
+        ResiduePInput = Prop_residue_decompPhase1 * NPC->P_residue_afterHavest;
+        NPC->P_fert_input = ResiduePInput/30;   
+    }
+
+    else if (NPC->Fertilization == 22)
+    {
+        ResiduePInput = Prop_residue_decompPhase2 * NPC->P_residue_afterHavest;
+        NPC->P_fert_input = ResiduePInput/30;   
+    }
+
     else{
-        InorgPInput = 0;
+        NPC->P_fert_input = 0;
     }
     
-    if(isnan(Manure_P_appRate[Lon][Lat][Crop->Seasons-1])){
-            ManurePInput= 0.0;} 
-        else{
-            ManurePInput = Manure_P_appRate[Lon][Lat][Crop->Seasons-1];
-        }
-    
-    OrgPInput = Org_frac * (ManurePInput + NPC->P_residue_beforeSowing + NPC->P_residue_afterHavest)/365;
-
-    NPC->P_unavail_org_fert = 0;
-    NPC->P_unavail_org_fert = Org_frac * (ManurePInput + NPC->P_residue_beforeSowing + NPC->P_residue_afterHavest);
-
-
-    NPC->P_fert_input = InorgPInput + OrgPInput;
     NPC->p_st.P_fert_input += NPC->P_fert_input;
+    NPC->P_unavail_org_fert = 0.;
 }
 
 /*------------------------------------------------------------*/
@@ -156,7 +235,7 @@ void GetNFertInput()
     float Residue_N_input;
     float Org_frac = 0.5;
 
-    if (NPC->Fertilization == 1)
+    if (NPC->Fertilization == 11)
     {
 
         if(isnan(Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1])){

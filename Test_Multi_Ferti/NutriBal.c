@@ -12,7 +12,7 @@
 /*----------------------------------------------------------*/
 
 void CalNutriAvail() {
-    float corr_para_P_uptake = 25.0;
+    float corr_para_P_uptake = 100;
     // The daily P availability is depend on the transpiration [cm] and P concentration [g/m3] in the soil solution
     NPC->st_P_avail = corr_para_P_uptake * NPC->p_st.cP_inorg * WatBal->rt.Transpiration * 0.1;
 

@@ -11,9 +11,9 @@
 /* -------------------------------------------------------------------------*/
 void NutrientPartioning()
 {     
-    float Total_N_demand;
-    float Total_P_demand;
-    float Total_K_demand;
+    float Total_N_demand = 0;
+    float Total_P_demand = 0;
+    float Total_K_demand = 0;
     
     float NutrientLimit;
     float N_Fix_rt;
@@ -25,9 +25,9 @@ void NutrientPartioning()
     Total_K_demand = Crop->K_rt.Demand_lv + Crop->K_rt.Demand_st + Crop->K_rt.Demand_ro;
     
     /* No nutrients are absorbed from the soil after development stage DevelopmentStageNLimit or */
-    /* when severe water shortage occurs                                           */
+    /* when severe water shortage occurs*/
     NutrientLimit = 0.;
-    if (WatBal->rt.Transpiration/Evtra.MaxTranspiration > 0.01)
+    if (Crop->st.Development < Crop->prm.DevelopmentStageNLimit && WatBal->rt.Transpiration/Evtra.MaxTranspiration > 0.01)
         NutrientLimit = 1.;
     
     //N_Fix_rt= max(0.,Crop->N_rt.Uptake * Crop->prm.N_fixation / max(0.02, 1.-Crop->prm.N_fixation));
@@ -37,7 +37,6 @@ void NutrientPartioning()
     /* Nutrient uptake cannot be larger than the availability and is larger or equal to zero */
     
     Crop->N_rt.Uptake = max(0.,min(Total_N_demand - N_Fix_rt, NPC->st_N_avail)) * NutrientLimit/Step;
-    NPC->rt_crop_N_uptake = Crop->N_rt.Uptake;
     Crop->P_rt.Uptake = max(0.,min(Total_P_demand, NPC->st_P_avail))* NutrientLimit/Step;
 
     // I use the N, P availability above to replace the availability calculated based on the management file

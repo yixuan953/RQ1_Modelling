@@ -40,6 +40,7 @@ void InitializeSoilPPool()
    NPC->p_st.StableP = min(MaxStableP, P_Olsen[Lon][Lat] * 16/3);                // Stable P pool as a function of P oxlate (= Olsen_P * 8)
    NPC->p_st.cP_inorg = 0.0;
    NPC->p_st.cP_tot = 0.0;
+   NPC->p_st.Pacc = 0.0;
    
    // Initialize the P losses;
    NPC->p_rt.PLeaching = 0.0;
@@ -52,6 +53,7 @@ void InitializeSoilPPool()
    NPC->p_rt.PdisL_corr = 0.0;  // Corrected changes of the labile P pool
    NPC->p_rt.PdisS = 0.0;       // Changes of the stable P pool
    NPC->p_rt.PdisS_corr = 0.0;  // Corrected changes of the stable P pool
+   NPC->p_rt.Pacc = 0.0;
 
 }
 
@@ -150,18 +152,19 @@ void CalPdisS()
 void CalPdisL()
 {
    TopsoilDepth = 30.0;           // [cm]
-   float Pacc = 0.0;              // [kg P/ha]
    float MolarMassP = 31.0;       // [mg/mmol]
+   NPC->p_rt.Pacc = 0.0;          // [kg P/ha]
    
    if (Crop->Sowing <1) // When the crop is now sowed or transplanted, there is no crop uptake
    {
-    Pacc = NPC->P_fert_input + P_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SOP_decomp - NPC->p_rt.PSurfRunoff - NPC->p_rt.PSubRunoff - NPC->p_rt.PLeaching;
+    NPC->p_rt.Pacc = NPC->P_fert_input + P_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SOP_decomp - NPC->p_rt.PSurfRunoff - NPC->p_rt.PSubRunoff - NPC->p_rt.PLeaching;
    } else 
    {
-    Pacc = NPC->P_fert_input + P_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SOP_decomp - Crop->P_rt.Uptake - NPC->p_rt.PSurfRunoff - NPC->p_rt.PSubRunoff - NPC->p_rt.PLeaching;
+    NPC->p_rt.Pacc = NPC->P_fert_input + P_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SOP_decomp - Crop->P_rt.Uptake - NPC->p_rt.PSurfRunoff - NPC->p_rt.PSubRunoff - NPC->p_rt.PLeaching;
    }
    
-   NPC->p_rt.PdisL = (100 * Pacc/(MolarMassP * TopsoilDepth * bulk_density[Lon][Lat])) - NPC->p_rt.PdisS; // Unit: [mmol P/kg soil]
+   NPC->p_rt.PdisL = (100 * NPC->p_rt.Pacc/(MolarMassP * TopsoilDepth * bulk_density[Lon][Lat])) - NPC->p_rt.PdisS; // Unit: [mmol P/kg soil]
+   NPC->p_st.Pacc += NPC->p_rt.Pacc;
 
 }
 

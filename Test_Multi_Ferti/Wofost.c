@@ -295,6 +295,7 @@ int main(int argc, char **argv)
                             
                             /* Determine if the sowing already has occurred */
                             IfFertilization(Grid->start);
+                            IfMultiFertilization();
                             GetPFertInput();
                             GetNFertInput(); 
 
@@ -371,7 +372,6 @@ int main(int argc, char **argv)
                                 }
                                 else
                                 {  
-                                    Crop->HarvestDate = current_date;
                                     
                                     /* After harvest: Calculate the parameters that will be used for the next season*/
                                     CalEmissionFactor(); // Emission factors
@@ -403,19 +403,17 @@ int main(int argc, char **argv)
 
                                     CalResidueInput();   // Using the residue N, P content in root, leaves and stems
 
-                                    /* Input the residue (root) and update the P pool */
-                                    // NPC->P_fert_input = NPC->P_residue_afterHavest * Org_frac;
-                                    // NPC->p_st.P_fert_input += NPC->P_fert_input;
-                                    // CalPPoolDynamics();
-
                                     // Initialize the precipitation surplus
                                     WatBal->st.PreSurplus = 0;
+
+                                    // Initialize the P accumulation
+                                    NPC->p_st.Pacc = 0;
 
                                     // Initialize the N balance, P losses and soil water moisture after each cropping season
                                     InitilizeNPBalance(); 
                                     InitializeWatBal();    
 
-                                    CalResidueInput();   // Using the residue N, P content in root, leaves and stems                                    
+                                    CalResidueInput();   // Using the residue N, P content in root, leaves and stems as the input of the next season                                   
 
                                 }
                             }

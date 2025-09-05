@@ -6,7 +6,7 @@
 
 void header_AO(FILE *fp_ao)
 {
-    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,N_unused_org_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,P_decomp,P_dep,P_fert,P_unused_org_fert,LabileP,StableP,PrecP,P_surf,P_sub,P_leach,P_uptake\n");
+    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,N_unused_org_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,P_decomp,P_dep,P_fert,P_unused_org_fert,LabileP,StableP,PrecP,P_acc,P_surf,P_sub,P_leach,P_uptake\n");
 }
 
 void Output_Annual(FILE *fp_ao)
@@ -17,7 +17,7 @@ void Output_Annual(FILE *fp_ao)
                 "%4.3f, %4.3f, %4.3f, %4.3f,"         // N losses through gaseous emission
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // N losses through water fluxes and uptakes 
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // P inputs
-                "%4.2f, %4.2f, %4.2f,"                // P pools
+                "%4.2f, %4.2f, %4.2f, %4.2f,"         // P pools
                 "%4.2f, %4.2f, %4.2f, %4.2f\n",       // P losses through water fluxes and uptakes 
                Latitude[Lat],
                Longitude[Lon],
@@ -32,6 +32,6 @@ void Output_Annual(FILE *fp_ao)
                NPC->n_st.N_loss_surf,NPC->n_st.N_loss_sub,NPC->n_st.N_loss_leach,Crop->N_st.Uptake,
                // P dynamics
                NPC->p_st.P_decomp,NPC->p_st.P_dep,NPC->p_st.P_fert_input,NPC->P_unavail_org_fert,
-               NPC->p_st.LabileP,NPC->p_st.StableP,NPC->p_st.PrecP,
+               NPC->p_st.LabileP,NPC->p_st.StableP,NPC->p_st.PrecP,NPC->p_st.Pacc,
                NPC->p_st.PSurfRunoff,NPC->p_st.PSubRunoff,NPC->p_st.PLeaching,Crop->P_st.Uptake);
 }

@@ -333,8 +333,6 @@ typedef struct PLANT {
         float fac_st;
         float fac_so;
         float rt_DevPrev;
-
-        struct tm HarvestDate;
         
         Parameters prm;
         
@@ -428,6 +426,7 @@ typedef struct P_RATE {
         float PLeaching;
         float PSurfRunoff;
         float PSubRunoff;
+        float Pacc;
         } p_rates; 
 
 typedef struct P_STATE {
@@ -445,6 +444,8 @@ typedef struct P_STATE {
         float PSubRunoff;
 
         float P_fert_input;
+
+        float Pacc;
         } p_states; 
 
 typedef struct N_STATE {
