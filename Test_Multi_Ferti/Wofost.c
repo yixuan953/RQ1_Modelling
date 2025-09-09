@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     Green *wipe;             // 声明一个指向Green类型的指针，Green可能是一个用户定义的数据类型。
 
     // maize-160; wheat-270; rice-180; soybean-150
-    int CycleLength = 160; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
+    int CycleLength = 150; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
     int NumberOfFiles;     // 声明一个整型变量NumberOfFiles，可能用来存储文件的数量。
     int Emergence;         // 声明一个整型变量Emergence，其具体用途不明。
     int i;                 // 声明一个整型变量i，通常用作循环计数。
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 
     Grid->npc = (NPCycling *)malloc(sizeof(NPCycling)); // Allocate memory space for NPCycling variables
 
-    /* Allocate memory for the file pointers */      /* 为文件指针分配内存 */
+    /* Allocate memory for the file pointers */            /* 为文件指针分配内存 */
     files_DO = malloc(sizeof(**files_DO) * NumberOfFiles); // 分配足够存储NumberOfFiles个FILE指针的内存
     files_AO = malloc(sizeof(**files_AO) * NumberOfFiles); // 分配足够存储NumberOfFiles个FILE指针的内存
 
@@ -87,6 +87,7 @@ int main(int argc, char **argv)
     /* Open the output files */                            /* 打开输出文件 */
     memset(name_old_DO, '\0', MAX_STRING);                 // 将name_old数组初始化为全'\0'
     memset(name_old_AO, '\0', MAX_STRING);                 // 将name_old数组初始化为全'\0'
+
     while (Grid)                                           // 遍历Grid链表
     {                                                      /* Make valgrind happy  */
         memset(name_DO, '\0', MAX_STRING);                    // 将name数组初始化为全'\0'
@@ -223,13 +224,20 @@ int main(int argc, char **argv)
                 Grid = initial;
               
                 while (Grid)
-                 {
+                {
                     Grid->flag = 0;
-                    char* sow_date = DekadDate(Sow_date[Lon][Lat]);
-                    //printf("%s %4.2f %s\n", Grid->start, Sow_date[Lon][Lat], sow_date); //Check if the sowing date is read correctly
-                    strcpy(Grid->start, sow_date); //Use strcpy to assign the new value
-                    //printf("%s %4.2f %s\n", Grid->start, Sow_date[Lon][Lat], sow_date); //Check if the sowing date in Grid -> start is replaced by the value in mask file read correctly
-                    free(sow_date);                        
+                    char* sow_date_dekad = DekadDate(Sow_date[Lon][Lat]);
+                    strcpy(Grid->start, sow_date_dekad); //Use strcpy to assign the new value
+                    free(sow_date_dekad);
+
+                    // Build a tm structure for the sowing date 
+                    int sow_month, sow_day;
+                    sscanf(Grid->start, "%d-%d", &sow_month, &sow_day);
+                    memset(&sow_date, 0, sizeof(sow_date));
+                    sow_date.tm_mon = sow_month - 1;    // tm_mon is 0-based
+                    sow_date.tm_mday = sow_day;
+
+                    // Allocate spcae for harvest_date
 
                     for (i = 0; i <= Meteo->Seasons; i++)
                     {
@@ -240,9 +248,9 @@ int main(int argc, char **argv)
                     Grid = Grid->next;
                 }
 
-                 for (Day = 0; Day < Meteo->ntime; Day++)
+                for (Day = 0; Day < Meteo->ntime; Day++)
                  // assume that the series start January first // 假设系列从一月一日开始
-                 {
+                {
 
                     Grid = initial;
 
@@ -252,11 +260,13 @@ int main(int argc, char **argv)
                     current_date.tm_mday = 0 + MeteoDay[Day];
                     mktime(&current_date);
 
+                    sow_date.tm_year = current_date.tm_year;
+                    mktime(&sow_date);
+    
                     while (Grid)
                     {
                         /* Get data, states and rates from the Grid structure and */
-                        /* put them in the place holders */
-                        
+                        /* put them in the place holders */                        
                         Crop = Grid->crp;
                         Crop->prm.TempSum1 = TSUM1[Lon][Lat];
                         Crop->prm.TempSum2 = TSUM2[Lon][Lat];
@@ -271,7 +281,7 @@ int main(int argc, char **argv)
                         Temp = 0.5 * (Tmax[Lon][Lat][Day] + Tmin[Lon][Lat][Day]);
                         DayTemp = 0.5 * (Tmax[Lon][Lat][Day] + Temp);
                         AveTemp += DayTemp/(Day+1);
-
+                            
                         if (Day <= 1){
 
                             CalSoilTexturePara();   // Calculate N, P cycling related parameters
@@ -292,16 +302,16 @@ int main(int argc, char **argv)
                         /* Only simulate between start and end year */ 
                         if ((MeteoYear[Day] >= Meteo->StartYear && MeteoYear[Day] <= Meteo->EndYear) && (Meteo->Seasons >= Crop->Seasons))
                         {
-                            
-                            /* Determine if the sowing already has occurred */
-                            IfFertilization(Grid->start);
+
+                            /* Determine if the sowing already has occurred */                                
+                            IfFertilization();
                             IfMultiFertilization();
                             GetPFertInput();
                             GetNFertInput(); 
-
+                            
                             IfSowing(Grid->start);
 
-                            if(Crop->Sowing <1 || Crop->Emergence == 0)
+                            if(Crop->Sowing == 0 || Crop->Emergence == 0)
                             {
                                 Astro();
                                 CalcPenman();
@@ -309,7 +319,6 @@ int main(int argc, char **argv)
                                 EvapTra(); 
                                 RateCalulationWatBal(); 
                                 IntegrationWatBal();
-                                //printf("%4d,%3d,%4.2f,%4.2f,%4.2f,%4.2f\n",MeteoYear[Day],Day,WatBal->st.SurfaceStorage,WatBal->rt.Infiltration,WatBal->st.Moisture,WatBal->st.MoistureLOW); //Check if the soil moisture could be updated
                                 CalDecomp();
                                 CalPConcentration();
                                 CalPPoolDynamics();                                       
@@ -327,6 +336,7 @@ int main(int argc, char **argv)
                                     InitializeNutrients(); // Consider delete the soil total N, P within this function, only initialize crop N, P content                         
                                 }
                             }
+
                             if (Crop->Sowing >= 1 && Crop->Emergence == 1)
                             {
                                 if (Crop->st.Development <= (Crop->prm.DevelopStageHarvest) && Crop->GrowthDay < CycleLength)
@@ -363,16 +373,18 @@ int main(int argc, char **argv)
                                     CalDecomp();
                                     CalPPoolDynamics();
 
-                                    /* Daily scale results */ /* 状态计算 */
-                                    // Output_Daily(files_DO[Grid->file_DO]);
-
                                     /* Update the number of days that the crop has grown*/ /* 更新作物已经生长的天数 */
                                     Crop->GrowthDay++;
-                                    
                                 }
-                                else
-                                {  
-                                    
+
+                                else {       
+                                    /* Record the date when crop is harvested */
+                                    memset(&harvest_date, 0, sizeof(harvest_date));
+                                    harvest_date.tm_year = current_date.tm_year;
+                                    harvest_date.tm_mon = current_date.tm_mon;
+                                    harvest_date.tm_mday = current_date.tm_mday;
+                                    mktime(&harvest_date);  
+
                                     /* After harvest: Calculate the parameters that will be used for the next season*/
                                     CalEmissionFactor(); // Emission factors
                                     CalRunoffFactors();  // Runoff factors
@@ -414,12 +426,10 @@ int main(int argc, char **argv)
                                     InitializeWatBal();    
 
                                     CalResidueInput();   // Using the residue N, P content in root, leaves and stems as the input of the next season                                   
-
                                 }
                             }
 
-                        Output_Daily(files_DO[Grid->file_DO]);
-                        
+                         Output_Daily(files_DO[Grid->file_DO]);
                         }   
 
 
@@ -437,7 +447,7 @@ int main(int argc, char **argv)
                     free(Irri_time_count[i]);
                  }
                  free(Irri_time_count);
-                Irri_time_count = NULL;
+                 Irri_time_count = NULL;
 
             }
         }

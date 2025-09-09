@@ -8,64 +8,30 @@
 /* Purpose: Check if fertilization before sowing                 */
 /*---------------------------------------------------------------*/
 
-void IfFertilization(char* dateString) 
+#include <time.h>
+
+void IfFertilization()  
 {
     NPC->Fertilization = 0;
 
-    int month, sow_day;
-    sscanf(dateString, "%d-%d", &month, &sow_day);
+    // Convert both dates to time_t (seconds since epoch)
+    time_t t_sow   = mktime(&sow_date);
+    time_t t_curr  = mktime(&current_date);
 
-    // Build a tm structure for the sowing date (in the current year)
-    struct tm sow_date = {0};
-    sow_date.tm_year = current_date.tm_year;
-    sow_date.tm_mon = month - 1;    // tm_mon is 0-based
-    sow_date.tm_mday = sow_day;
+    // Calculate day difference (round to nearest day)
+    int diff_days = (int) difftime(t_curr, t_sow) / (60 * 60 * 24);
 
-    // Normalize to correct tm_wday, tm_yday, etc.
-    mktime(&sow_date);
-
-    for(int offset = -4; offset <= 2; offset++){
-        struct tm fert_date = sow_date; 
-        fert_date.tm_mday += offset;
-        mktime(&fert_date); // Normalize each time
-        if (current_date.tm_year == fert_date.tm_year && 
-            current_date.tm_mon == fert_date.tm_mon && 
-            current_date.tm_mday == fert_date.tm_mday && 
-            MeteoYear[Day] <= Meteo->EndYear)
-            {
-                NPC->Fertilization = 11; 
-                break;
-            } 
+    // Check ranges directly
+    if (MeteoYear[Day] <= Meteo->EndYear) {
+        if (diff_days >= -4 && diff_days <= 2)
+            NPC->Fertilization = 11;
+        else if (diff_days >= 3 && diff_days <= 25)
+            NPC->Fertilization = 12;
+        else if (diff_days >= 26 && diff_days <= 55)
+            NPC->Fertilization = 13;
     }
-    
-    for(int offset = 3; offset <= 25; offset++){
-        struct tm fert_date = sow_date; 
-        fert_date.tm_mday += offset;
-        mktime(&fert_date); // Normalize each time
-        if (current_date.tm_year == fert_date.tm_year && 
-            current_date.tm_mon == fert_date.tm_mon && 
-            current_date.tm_mday == fert_date.tm_mday && 
-            MeteoYear[Day] <= Meteo->EndYear)
-            {
-                NPC->Fertilization = 12; 
-                break;
-            } 
-    } 
-
-    for(int offset = 26; offset <= 55; offset++){
-        struct tm fert_date = sow_date; 
-        fert_date.tm_mday += offset;
-        mktime(&fert_date); // Normalize each time
-        if (current_date.tm_year == fert_date.tm_year && 
-            current_date.tm_mon == fert_date.tm_mon && 
-            current_date.tm_mday == fert_date.tm_mday && 
-            MeteoYear[Day] <= Meteo->EndYear)
-            {
-                NPC->Fertilization = 13; 
-                break;
-            } 
-    }     
 }
+
 
 
 /*---------------------------------------------------------------*/
@@ -75,43 +41,21 @@ void IfFertilization(char* dateString)
 
 void IfMultiFertilization()
 {
+    if (Crop->st.Development >= 2.0 && Crop->Sowing == 0) {
 
-    if (Crop->st.Development >= 2.0 && Crop->Sowing == 0){
+        // Convert both dates to time_t (seconds since epoch)
+        time_t t_harvest = mktime(&harvest_date);
+        time_t t_curr    = mktime(&current_date);
 
-        /* Record the date when crop is harvested */
-        struct tm harvest_date = {0};
-        harvest_date.tm_year = current_date.tm_year;
-        harvest_date.tm_mon = current_date.tm_mon;
-        harvest_date.tm_mday = current_date.tm_mday;
-        mktime(&harvest_date);
+        // Calculate difference in days
+        int diff_days = (int) difftime(t_curr, t_harvest) / (60 * 60 * 24);
 
-        for(int offset = 0; offset <= 29; offset++){
-            struct tm fert_date = harvest_date; 
-            fert_date.tm_mday += offset;
-            mktime(&fert_date); // Normalize each time
-            if (current_date.tm_year == fert_date.tm_year && 
-                current_date.tm_mon == fert_date.tm_mon && 
-                current_date.tm_mday == fert_date.tm_mday && 
-                MeteoYear[Day] <= Meteo->EndYear)
-                {
-                    NPC->Fertilization = 21; 
-                    break;
-                } 
+        if (MeteoYear[Day] <= Meteo->EndYear) {
+            if (diff_days >= 0 && diff_days <= 29)
+                NPC->Fertilization = 21;   // phase 1
+            else if (diff_days >= 30 && diff_days <= 59)
+                NPC->Fertilization = 22;   // phase 2
         }
-        
-        for(int offset = 30; offset <= 59; offset++){
-            struct tm fert_date = harvest_date; 
-            fert_date.tm_mday += offset;
-            mktime(&fert_date); // Normalize each time
-            if (current_date.tm_year == fert_date.tm_year && 
-                current_date.tm_mon == fert_date.tm_mon && 
-                current_date.tm_mday == fert_date.tm_mday && 
-                MeteoYear[Day] <= Meteo->EndYear)
-                {
-                    NPC->Fertilization = 22; 
-                    break;
-                } 
-        }          
     }
 }
 
@@ -149,13 +93,11 @@ void GetPFertInput()
     float ManurePInput = 0.;
     float ResiduePInput = 0.;
 
+    float Prop_manure_decompPhase1 = 0.50;  // Proportion of components in manure that can be decomposed in 7 days
+    float Prop_manure_decompPhase2 = 0.15;  // Proportion of components in manure that can be decomposed in 60 days
 
-
-    float Prop_manure_decompPhase1 = 0.50;  // Proportion of components in manure that can be decomposed in one week
-    float Prop_manure_decompPhase2 = 0.15;  // Proportion of components in manure that can be decomposed in one month
-
-    float Prop_residue_decompPhase1 = 0.50; // Proportion of components in residue that can be decomposed in one week
-    float Prop_residue_decompPhase2 = 0.20; // Proportion of components in residue that can be decomposed in one month
+    float Prop_residue_decompPhase1 = 0.50; // Proportion of components in residue that can be decomposed in 30 days
+    float Prop_residue_decompPhase2 = 0.20; // Proportion of components in residue that can be decomposed in 60 days
 
     NPC->P_fert_input = 0.0;
 

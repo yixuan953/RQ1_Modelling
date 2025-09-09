@@ -16,9 +16,9 @@ void Output_Annual(FILE *fp_ao)
                 "%4.2f, %4.2f, %4.2f, %4.2f, %4.2f,"  // N inputs
                 "%4.3f, %4.3f, %4.3f, %4.3f,"         // N losses through gaseous emission
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // N losses through water fluxes and uptakes 
-                "%4.2f, %4.2f, %4.2f, %4.2f,"         // P inputs
-                "%4.2f, %4.2f, %4.2f, %4.2f,"         // P pools
-                "%4.2f, %4.2f, %4.2f, %4.2f\n",       // P losses through water fluxes and uptakes 
+                "%4.2f, %4.2f, %4.4f, %4.2f,"         // P inputs
+                "%4.3f, %4.3f, %4.3f, %4.3f,"         // P pools
+                "%4.3f, %4.3f, %4.3f, %4.3f\n",       // P losses through water fluxes and uptakes 
                Latitude[Lat],
                Longitude[Lon],
                MeteoYear[Day],

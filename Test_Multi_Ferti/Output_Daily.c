@@ -17,8 +17,8 @@ void Output_Daily(FILE *fp_do)
                 "%2d,"           //If fertilizer is applied or not
                 "%4.2f,%4.2f,"   //N,P demand
                 "%4.2f,%4.2f,"   //N,P uptake
-                "%4.2f,%4.2f,%4.2f,%4.2f,"  //Soil P pools + availability
-                "%4.2f,%4.2f,%4.2f,%4.2f,%4.2f\n",  //P losses
+                "%4.3f,%4.3f,%4.3f,%4.3f,"  //Soil P pools + availability
+                "%4.3f,%4.3f,%4.3f,%4.3f,%4.3f\n",  //P losses
                 Latitude[Lat],
                 Longitude[Lon],
                 MeteoYear[Day],
@@ -27,7 +27,7 @@ void Output_Daily(FILE *fp_do)
                 WatBal->rt.Transpiration,
                 WatBal->rt.EvapWater,
                 WatBal->rt.EvapSoil,
-                WatBal->st.Moisture,
+                WatBal->st.RootZoneMoisture,
                 WatBal->rt.Runoff,
                 WatBal->rt.Loss,
                 WatBal->rt.Percolation,

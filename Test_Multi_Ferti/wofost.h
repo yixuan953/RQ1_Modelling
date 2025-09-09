@@ -495,9 +495,11 @@ typedef struct NP_CYCLING {
         float st_P_avail;       // kg P/ha
         
         float rt_crop_N_uptake; 
+
         /* Table related to N, P cycling */    
         } NPCycling;
 NPCycling *NPC; 
+
 
 
 /* Place holder for a simulation unit */
@@ -515,7 +517,7 @@ typedef struct SIMUNIT {
         char start[MAX_STRING];
         char output_daily[MAX_STRING];
         char output_annual[MAX_STRING];
-
+        
         /* Statistics */
         float twso[100000];
         float length[100000];
@@ -608,6 +610,8 @@ enum{
         FERT_NTYPES
     };
 
+struct tm sow_date;
+struct tm harvest_date;
 
 typedef struct FERT {
         char mask[MAX_STRING];
