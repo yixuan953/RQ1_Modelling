@@ -6,13 +6,14 @@
 
 void header_DO(FILE *fp_do)
 {
-    fprintf(fp_do,"Lat,Lon,Year,Day,Dev_Stage,Transpiration,EvaWater,EvaSoil,SoilMoisture,SurfaceRunoff,SubsurfaceRunoff,Percolation,TSMD,Fertilization,N_demand,P_demand,N_Uptake,P_Uptake,Lpool,Spool,Prepool,P_avail,P_Surf,P_Sub,P_Leaching,cPi,RootDepth\n");
+    fprintf(fp_do,"Lat,Lon,Year,Day,Dev_Stage,Demand_grain,Max_P_demand_lv,Max_P_demand_st,Max_P_demand_ro,st_lv,st_st,st_ro,Transpiration,EvaWater,EvaSoil,SoilMoisture,SurfaceRunoff,SubsurfaceRunoff,Percolation,TSMD,Fertilization,N_demand,P_demand,N_Uptake,P_Uptake,Lpool,Spool,Prepool,P_avail,P_Surf,P_Sub,P_Leaching,cPi,RootDepth\n");
 }
 
 void Output_Daily(FILE *fp_do)
 {      
          fprintf(fp_do,"%7.2f,%7.2f,%4d,%3d," // Lat, Lon, MeteoYear, MeteoDay
-                "%4.2f," // Crop stage
+                "%4.2f,%4.2f,"    // Crop stage
+                "%4.4f,%4.4f,%4.4f,%4.4f,%4.4f,%4.4f,"             // For checking N, P demand
                 "%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f," // Water balance
                 "%2d,"           //If fertilizer is applied or not
                 "%4.2f,%4.2f,"   //N,P demand
@@ -24,10 +25,17 @@ void Output_Daily(FILE *fp_do)
                 MeteoYear[Day],
                 MeteoDay[Day],
                 Crop->st.Development,
+                Crop->P_rt.Demand_so,
+                Crop->P_st.Max_lv,
+                Crop->P_st.Max_st,
+                Crop->P_st.Max_ro,
+                Crop->P_st.leaves,
+                Crop->P_st.stems,
+                Crop->P_st.roots,
                 WatBal->rt.Transpiration,
                 WatBal->rt.EvapWater,
                 WatBal->rt.EvapSoil,
-                WatBal->st.RootZoneMoisture,
+                WatBal->st.Moisture,
                 WatBal->rt.Runoff,
                 WatBal->rt.Loss,
                 WatBal->rt.Percolation,
