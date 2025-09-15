@@ -43,4 +43,7 @@ float miu_SDis;   // The rate constant for the transfer from the stable P pool t
 /* Fertilization related parameters */
 float Org_frac; // Fraction of organic fertilizer inputs that cannot be uptaken by crops
 
+    
+float PN_ratio_lv;
+
 #endif	// NPCYCLING_H

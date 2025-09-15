@@ -12,9 +12,9 @@
 /*----------------------------------------------------------*/
 
 void CalNutriAvail() {
-    float corr_para_P_uptake = 1;
-    // The daily P availability is depend on the soil moisture [%] and P concentration [g/m3] in the soil solution
-    NPC->st_P_avail = NPC->p_st.cP_inorg * Crop->st.RootDepth * WatBal->st.Moisture * 0.1; 
+
+    // The daily P availability is depend on the soil moisture [-], P concentration [g/m3] and maximum root depth in the soil solution
+    NPC->st_P_avail = NPC->p_st.cP_inorg * WatBal->st.Moisture * Crop->prm.MaxRootingDepth * 0.1; 
 
     // The daily N availability is dependent on deposition, decomposition, and the unsed fertilizer input
     NPC->st_N_avail = NPC->st_N_avail + NPC->N_fert_input + N_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SON_decomp - Crop->N_rt.Uptake;

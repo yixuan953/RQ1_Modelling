@@ -106,9 +106,18 @@ void FillCropVariables(Plant *CROP, float *Variable)
     CROP->prm.TCPT                     = Variable[63];
     CROP->prm.TCKT                     = Variable[64];
     CROP->prm.N_fixation               = Variable[65];
-    CROP->prm.Frac_translocation       = Variable[66];
-
-
+    
+    // new to 8netcdf
+    CROP->prm.N_UptakeMax              = Variable[66];
+    CROP->prm.P_UptakeMax              = Variable[67];
+    CROP->prm.K_UptakeMax              = Variable[68];
+    CROP->prm.Amax_SLP                 = Variable[69];
+    CROP->prm.Amax_LNB                 = Variable[70];
+    CROP->prm.Amax_Ref                 = Variable[71];
+    CROP->prm.KN                       = Variable[72]; // leaf N extinction coefficient
+    
+    
+    
     for (i=0;i<=NR_VARIABLES_CRP;i++) 
     {
         Variable[i] = 0.;

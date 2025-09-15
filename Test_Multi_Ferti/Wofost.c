@@ -303,7 +303,8 @@ int main(int argc, char **argv)
                         if ((MeteoYear[Day] >= Meteo->StartYear && MeteoYear[Day] <= Meteo->EndYear) && (Meteo->Seasons >= Crop->Seasons))
                         {
 
-                            /* Determine if the sowing already has occurred */                                
+                            /* Determine if the sowing already has occurred */ 
+                            RatesToZero();                               
                             IfFertilization();
                             IfMultiFertilization();
                             GetPFertInput();
@@ -412,8 +413,6 @@ int main(int argc, char **argv)
                                     Crop->Emergence = 0;
                                     Crop->Sowing = 0;
                                     Crop->Seasons++;
-
-                                    CalResidueInput();   // Using the residue N, P content in root, leaves and stems
 
                                     // Initialize the precipitation surplus
                                     WatBal->st.PreSurplus = 0;

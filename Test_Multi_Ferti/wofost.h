@@ -4,7 +4,7 @@
 #include <time.h>
 #include <math.h>
 
-#define NR_VARIABLES_CRP	67
+#define NR_VARIABLES_CRP	73
 #define NR_TABLES_CRP   	22
 #define NR_VARIABLES_SITE       12
 #define NR_TABLES_SITE          1
@@ -183,6 +183,16 @@ typedef struct PARAMETERS {
         float TCKT;   
         float N_fixation;
         float Frac_translocation;
+
+        //new to 8netcdf
+        float Amax_SLP;
+        float Amax_LNB;
+        float Amax_Ref;
+        float KN;           // Leaf N extinction coefficient
+        float N_UptakeMax;  // Maximum rate of daily nitrogen uptake
+        float P_UptakeMax;  // Maximum rate of daily phosphorus uptake
+        float K_UptakeMax;  // Maximum rate of daily potassium uptake
+
         } Parameters;
 
 
