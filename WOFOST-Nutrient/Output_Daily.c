@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "extern.h"
+#include "wofost.h"
+
+void header_DO(FILE *fp_do)
+{
+    fprintf(fp_do,"Lat,Lon,Year,Day,Radaition,Dev_Stage,Transpiration,EvaWater,EvaSoil,SoilMoisture,SurfaceRunoff,SubsurfaceRunoff,Percolation,TSMD,Fertilization,N_avail,N_uptake,P_uptake,Lpool,Spool,Prepool,P_avail,P_Surf,P_Sub,P_Leaching,cPi,RootDepth,N_decomp,P_decomp\n");
+}
+
+
+void Output_Daily(FILE *fp_do)
+{      
+         fprintf(fp_do,"%7.2f,%7.2f,%4d,%3d,%5.2f," // Lat, Lon, MeteoYear, MeteoDay
+                "%4.2f,"    // Crop stage
+                "%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f,%4.2f," // Water balance
+                "%2d,%4.3f,"     //If fertilizer is applied or not and N availability
+                "%4.2f,%4.2f,"   //N,P uptake
+                "%4.3f,%4.3f,%4.3f,%4.3f,"  //Soil P pools + availability
+                "%4.3f,%4.3f,%4.3f,%4.3f,%4.3f,"  //P losses
+                "%4.3f,%4.3f\n",  //N,P decomposition
+                Latitude[Lat],
+                Longitude[Lon],
+                MeteoYear[Day],
+                MeteoDay[Day],
+                Radiation[Lon][Lat][Day]/1000,
+                Crop->st.Development,
+                WatBal->rt.Transpiration,
+                WatBal->rt.EvapWater,
+                WatBal->rt.EvapSoil,
+                WatBal->st.Moisture,
+                WatBal->rt.Runoff,
+                WatBal->rt.Loss,
+                WatBal->rt.Percolation,
+                WatBal->st.TSMD,
+                NPC->Fertilization,
+                NPC->st_N_avail,
+                Crop->N_rt.Uptake,
+                Crop->P_rt.Uptake,
+                NPC->p_st.LabileP,
+                NPC->p_st.StableP,
+                NPC->p_st.PrecP,
+                NPC->st_P_avail,
+                NPC->p_rt.PSurfRunoff,
+                NPC->p_rt.PSubRunoff,
+                NPC->p_rt.PLeaching,
+                NPC->p_st.cP_inorg,
+                Crop->st.RootDepth,
+                NPC->decomp_rt.SON_decomp,
+                NPC->decomp_rt.SOP_decomp);
+}

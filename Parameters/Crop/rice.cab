@@ -208,3 +208,14 @@ KMAXLV_TB    =  0.0, 0.12,   ! maximum K concentration in leaves as function of 
             1.0, 0.04,
             2.0, 0.029,
             2.1, 0.029
+
+** org. wofost_80
+RNUPTAKEMAX =  7.2          ! Maximum rate of daily nitrogen uptake ['kg.ha-1.d-1']
+RPUPTAKEMAX =  0.8          ! Maximum rate of daily phosphorus uptake ['kg..ha-1.d-1']
+RKUPTAKEMAX =  7.4          ! Maximum rate of daily potassium uptake ['kg.ha-1.d-1']  
+
+** org. wofost_81           
+AMAX_SLP  =  3.24         ! slope of relationship between maximum leaf photosynthesis rate and specific leaf nitrogen  ['kg CO2 ha-1 h-1 (kg N m-2)-1']
+AMAX_LNB  =  0.0          ! specific leaf nitrogen below which there is no photosynthesis  ['kg N ha-1']
+AMAX_REF  =  40.00        ! maximum leaf CO2 assimilation rate  ['kg.ha-1.hr-1']
+KN        =  0.4          ! Extinction coefficient of leaf N concentration with canopy depth  ['-']

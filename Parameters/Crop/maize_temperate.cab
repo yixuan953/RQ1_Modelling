@@ -75,7 +75,6 @@ TMPFTB   =   0.00,    0.01,     ! reduction factor of AMAX
             42.00,    0.56
 TMNFTB   =   5.00,    0.00,     ! red. factor of gross assim. rate
              8.00,    1.00      ! as function of low min. temp. [cel; -]
-CO2 = 360.
              
 CO2AMAXTB       =  40., 0.00,      ! multiplication factor for AMAX 
              360.,  1.00,       ! to account for an increasing CO2 concentration
@@ -222,3 +221,14 @@ KMAXLV_TB    =  0.0, 0.096,   ! maximum K concentration in leaves as function of
                 1.0, 0.032,
                 2.0, 0.027,
                 2.1, 0.027
+                
+** org. wofost_80
+RNUPTAKEMAX =  7.2          ! Maximum rate of daily nitrogen uptake ['kg.ha-1.d-1']
+RPUPTAKEMAX =  0.8          ! Maximum rate of daily phosphorus uptake ['kg.ha-1.d-1']
+RKUPTAKEMAX =  7.4          ! Maximum rate of daily potassium uptake ['kg.ha-1.d-1']  
+
+** org. wofost_81 
+AMAX_SLP  =  3.24         ! slope of relationship between maximum leaf photosynthesis rate and specific leaf nitrogen  ['kg CO2 ha-1 h-1 (kg N m-2)-1']
+AMAX_LNB  =  0.0          ! specific leaf nitrogen below which there is no photosynthesis  ['kg N ha-1']
+AMAX_REF  =  70.00        ! maximum leaf CO2 assimilation rate  ['kg.ha-1.hr-1']
+KN        =  0.4          ! Extinction coefficient of leaf N concentration with canopy depth  ['-']
