@@ -39,14 +39,14 @@ void NutrientPartioning()
     
     // I use the N, P availability above to replace the availability calculated based on the management file
     /* Without nutrient limitation */
-    Crop->N_rt.Uptake = fmax(0., min((Total_N_demand - N_Fix_rt), Crop->prm.N_UptakeMax)) * NutrientLimit/Step;
-    Crop->P_rt.Uptake = fmax(0., min(Total_P_demand, Crop->prm.P_UptakeMax))* NutrientLimit/Step;
-    Crop->K_rt.Uptake = fmax(0., min(Total_K_demand, Crop->prm.K_UptakeMax))* NutrientLimit/Step;
+    // Crop->N_rt.Uptake = fmax(0., min((Total_N_demand - N_Fix_rt), Crop->prm.N_UptakeMax)) * NutrientLimit/Step;
+    // Crop->P_rt.Uptake = fmax(0., min(Total_P_demand, Crop->prm.P_UptakeMax))* NutrientLimit/Step;
+    // Crop->K_rt.Uptake = fmax(0., min(Total_K_demand, Crop->prm.K_UptakeMax))* NutrientLimit/Step;
 
     /* With nutrient limitation */
-    // Crop->N_rt.Uptake = fmax(0., ext_min((Total_N_demand - N_Fix_rt), NPC->st_N_avail, Crop->prm.N_UptakeMax)) * NutrientLimit/Step;
-    // Crop->P_rt.Uptake = fmax(0., ext_min(Total_P_demand, NPC->st_P_avail, Crop->prm.P_UptakeMax))* NutrientLimit/Step;
-    // Crop->K_rt.Uptake = fmax(0., ext_min(Total_K_demand, K_avail, Crop->prm.K_UptakeMax))* NutrientLimit/Step;
+    Crop->N_rt.Uptake = fmax(0., ext_min((Total_N_demand - N_Fix_rt), NPC->st_N_avail, Crop->prm.N_UptakeMax)) * NutrientLimit/Step;
+    Crop->P_rt.Uptake = fmax(0., ext_min(Total_P_demand, NPC->st_P_avail, Crop->prm.P_UptakeMax))* NutrientLimit/Step;
+    Crop->K_rt.Uptake = fmax(0., ext_min(Total_K_demand, K_avail, Crop->prm.K_UptakeMax))* NutrientLimit/Step;
 
     /* N uptake per crop organ kg ha-1 d-1*/
     if (Total_N_demand > tiny)

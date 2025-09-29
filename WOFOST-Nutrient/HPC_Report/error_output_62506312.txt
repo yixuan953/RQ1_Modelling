@@ -1,0 +1,2 @@
+load netcdf 4.6.1 (GCC) library and binaries.
+load Scientific Linux 7 libraries.

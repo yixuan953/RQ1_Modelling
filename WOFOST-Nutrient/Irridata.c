@@ -280,7 +280,11 @@ int GetIrriData(Water_Irri* Irri)
             if (!isnan(Sow_date[j][k])) {
                 for (l = 0; l < time_length; l++) {
                     // Irrigation_Rate[j][k][l] = roundz(0.1 * Irrigation_Rate[j][k][l], 2); // [cm by *0.1]
-                    Irrigation_Rate[j][k][l] = fmin(10.0, roundz(0.1 * Irrigation_Rate[j][k][l], 2));
+
+                    // Read the irrigation data
+                    // Irrigation_Rate[j][k][l] = fmin(10.0, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // With irrigation
+                    Irrigation_Rate[j][k][l] = fmin(0.0, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // Without irrigation
+
                     // Check if the irrigation data is written correctly
                     // printf("%3d %3d %3d %3d %5.2f %5.2f %5.2f\n", j, k, IrriYear[l], IrriMonth[l], Irrigation_Rate[j][k][l], Latitude[k], Longitude[j]);
                     }
