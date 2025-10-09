@@ -6,7 +6,7 @@
 
 void header_AO(FILE *fp_ao)
 {
-    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,P_decomp,P_dep,P_fert,P_unused_org_fert,LabileP,StableP,PrecP,P_acc,P_surf,P_sub,P_leach,P_uptake\n");
+    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,P_decomp,P_dep,P_fert,LabileP,StableP,PrecP,P_acc,P_surf,P_sub,P_leach,P_uptake\n");
 }
 
 void Output_Annual(FILE *fp_ao)

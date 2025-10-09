@@ -1,7 +1,0 @@
-/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Meteo/ 1981 2019 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Mask/Yangtze_secondrice_mask.nc
-Tmin_daily.nc  TMIN tasmin
-Tmax_daily.nc  TMAX tasmax
-SWdown_daily.nc  RADIATION SWdown
-Prec_daily.nc  RAIN Prec
-Wind_daily.nc  WINDSPEED Wind
-Vap_daily.nc  VAPOUR Vapour

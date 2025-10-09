@@ -1,2 +1,2 @@
-/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Irrigation/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Mask/LaPlata_mainrice_mask.nc
+/lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Unsus_Irrigation/ 1981 2016 35 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/LaPlata/Mask/LaPlata_mainrice_mask.nc
 LaPlata_mainrice_monthly_Irri_Rate.nc  IRRIRATE Irrigation_Rate

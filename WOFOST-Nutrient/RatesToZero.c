@@ -120,6 +120,7 @@ void RatesToZero()
         WatBal->rt.Runoff            = 0.;
         WatBal->rt.WaterRootExt      = 0.;
         WatBal->rt.RootZoneMoisture  = 0.;
+        NPC->N_decomp_pre            = 0.;
     }
 
     /* Set the decomposition rates */

@@ -102,7 +102,7 @@ void RateCalulationWatBal() {
     
     Irri_time_index = ((Crop->Seasons-1) * 12 + MeteoMonth[Day])-1; 
     // ---- Compute IRRITimeStep ----
-    if (WatBal->MoistureStress < 0.95 && Irri_time_count[Lon][Lat] != Irri_time_index) {    
+    if (WatBal->MoistureStress < 0.90 && Irri_time_count[Lon][Lat] != Irri_time_index) {    
         WatBal->rt.Irrigation = Irrigation_Rate[Lon][Lat][Irri_time_index];
         Irri_time_count[Lon][Lat] = Irri_time_index; // To mark that for this time step (monthly), irrigation has been applied
         

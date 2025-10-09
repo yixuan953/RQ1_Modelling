@@ -1,6 +1,6 @@
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:%.o=%.c)
-EXECUTABLE = wofost-NP-maize-rainfed
+EXECUTABLE = wofost-NP-soybean
 CC       = gcc
 CFLAGS  = -g -ggdb -O0 -Wall -Wextra -std=c99 -lm -lnetcdf -fcommon\
 #CFLAGS   = -Wall -O3

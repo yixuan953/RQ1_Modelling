@@ -79,6 +79,8 @@ void CalResidueInput(){
         NPC->P_residue_afterHavest = Crop->P_st.roots + Crop->P_st.leaves + Crop->N_st.stems;
         NPC->P_residue_beforeSowing = 0.0;
     }
+
+    NPC->N_decomp_pre = NPC->n_st.N_decomp;
 }
 
 

@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     Green *wipe;             // 声明一个指向Green类型的指针，Green可能是一个用户定义的数据类型。
 
     // maize-160; wheat-270; rice-180; soybean-150
-    int CycleLength = 160; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
+    int CycleLength = 150; // 声明一个整型变量CycleLength并初始化为300，可能表示一个周期的长度。
     int NumberOfFiles;     // 声明一个整型变量NumberOfFiles，可能用来存储文件的数量。
     int Emergence;         // 声明一个整型变量Emergence，其具体用途不明。
     int i;                 // 声明一个整型变量i，通常用作循环计数。
@@ -315,7 +315,6 @@ int main(int argc, char **argv)
                             IfMultiFertilization();
                             GetPFertInput();
                             GetNFertInput(); 
-                            
                             IfSowing(Grid->start);
 
                             if(Crop->Sowing == 0 || Crop->Emergence == 0)
@@ -382,10 +381,6 @@ int main(int argc, char **argv)
 
                                     /* Update the number of days that the crop has grown*/ /* 更新作物已经生长的天数 */
                                     Crop->GrowthDay++;
-
-                                    // if (Longitude[Lon]==4.75&&Latitude[Lat]==52.25){
-                                    //     printf("%3d %4.2f %7.2f %4.2f %4.2f %4.2f %4.2f\n", MeteoDay[Day], Crop->st.Development, Crop->N_st.Max_lv, Crop->st.leaves, Crop->N_st.leaves, Crop->NPK_Indx,Crop->NutrientStress);
-                                    // }
                                 }
 
                                 else {       

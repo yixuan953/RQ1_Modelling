@@ -505,6 +505,7 @@ typedef struct NP_CYCLING {
         float st_P_avail;       // kg P/ha
         
         float rt_crop_N_uptake; 
+        float N_decomp_pre;
 
         /* Table related to N, P cycling */    
         } NPCycling;
