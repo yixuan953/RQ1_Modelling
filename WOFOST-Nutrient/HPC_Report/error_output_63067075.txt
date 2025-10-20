@@ -1,0 +1,18 @@
+remove netcdf 4.6.1 (GCC) library and binaries.
+remove Scientific Linux 7 libraries.
+load netcdf 4.6.1 (GCC) library and binaries.
+load Scientific Linux 7 libraries.
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 43: ./wofost-NP-maize-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 44: ./wofost-NP-maize-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 45: ./wofost-NP-maize-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 46: ./wofost-NP-maize-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 49: ./wofost-NP-rice-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 50: ./wofost-NP-rice-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 51: ./wofost-NP-rice-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 52: ./wofost-NP-rice-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 55: ./wofost-NP-soybean-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 56: ./wofost-NP-soybean-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 59: ./wofost-NP-wheat-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 60: ./wofost-NP-wheat-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 61: ./wofost-NP-wheat-Rinfed: No such file or directory
+/shared/apps/slurm/var/spool/node251/job63067075/slurm_script: line 62: ./wofost-NP-wheat-Rinfed: No such file or directory

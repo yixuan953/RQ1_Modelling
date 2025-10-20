@@ -53,7 +53,7 @@ void InitializeSoilPPool()
    NPC->p_rt.PdisL_corr = 0.0;  // Corrected changes of the labile P pool
    NPC->p_rt.PdisS = 0.0;       // Changes of the stable P pool
    NPC->p_rt.PdisS_corr = 0.0;  // Corrected changes of the stable P pool
-   NPC->p_rt.Pacc = 0.0;
+   NPC->p_rt.Pacc = 0.0;        // Change of the accumulated P in soil
 
 }
 
@@ -115,9 +115,9 @@ void CalPSubRunoff()
 /* ---------------------------------------------------------------------------------------------------*/
 void CalPdisS()
 {
-  float n = 0.26;               // Parameter in the Freundlich constant calculation equation
+  float n = 0.26;                    // Parameter in the Freundlich constant calculation equation
   float KF = MaxStableP/(pow(90,n)); // Freundlich constant of the stable pool
-  float miu_DisS = 0.0014;      // The rate constant for the transfer from the soil solution to the stable P pool
+  float miu_DisS = 0.0014;           // The rate constant for the transfer from the soil solution to the stable P pool
   
   // Initial PdisS depends on cP_tot
   if ((KF*pow(NPC->p_st.cP_inorg, n)) >= NPC->p_st.StableP)
@@ -178,7 +178,7 @@ void CalPrecipChangeS()
 
   if (NPC->p_rt.PdisS < 0.0)        // Stable P pool is supplied by the precipitation P pool
   {
-    //When the precipitation P pool is not enough to supply the stable P pool
+    // When the precipitation P pool is not enough to supply the stable P pool
     if (NPC->p_st.PrecP < fabsf(NPC->p_rt.PrecP_S))
     {
       NPC->p_rt.PrecP_S = NPC->p_st.PrecP * (-1); 
