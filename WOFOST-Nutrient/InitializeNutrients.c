@@ -84,9 +84,6 @@ void InitializeNutrients()
     Site->st_N_mins = Mng->N_Mins;
     Site->st_P_mins = Mng->P_Mins;
     Site->st_K_mins = Mng->K_Mins;
-    
-    /* Set the soil nutrient states */
-
 
     /* No nutrient stress at initialization */
     Crop->N_st.Indx = 1.;

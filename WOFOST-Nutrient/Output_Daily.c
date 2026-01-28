@@ -6,7 +6,7 @@
 
 void header_DO(FILE *fp_do)
 {
-    fprintf(fp_do,"Lat,Lon,Year,Day,Radaition,Dev_Stage,Transpiration,EvaWater,EvaSoil,SoilMoisture,SurfaceRunoff,SubsurfaceRunoff,Percolation,TSMD,Fertilization,N_avail,N_uptake,P_uptake,Lpool,Spool,Prepool,P_avail,P_Surf,P_Sub,P_Leaching,cPi,N_decomp,P_decomp\n");
+    fprintf(fp_do,"Lat,Lon,Year,Day,Radaition,Dev_Stage,Transpiration,EvaWater,EvaSoil,SoilMoisture,SurfaceRunoff,SubsurfaceRunoff,Leaching,TSMD,Fertilization,N_avail,N_uptake,P_uptake,Lpool,Spool,Prepool,P_avail,P_Surf,P_Sub,P_Leaching,cPi,N_decomp,P_decomp\n");
 }
 
 
@@ -31,8 +31,8 @@ void Output_Daily(FILE *fp_do)
                 WatBal->rt.EvapSoil,
                 WatBal->st.Moisture,
                 WatBal->rt.Runoff,
+                WatBal->rt.SubsurfaceRunoff,
                 WatBal->rt.Loss,
-                WatBal->rt.Percolation,
                 WatBal->st.TSMD,
                 NPC->Fertilization,
                 NPC->st_N_avail,

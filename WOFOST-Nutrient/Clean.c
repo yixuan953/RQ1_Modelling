@@ -388,6 +388,7 @@ void CleanMeteo(Weather * Meteo)
         free(PC_ratio[j]);
         free(Al_Fe_ox[j]);
         free(P_Olsen[j]);
+        free(litho[j]);
     }
     free(Tmin);
     free(Tmax);
@@ -415,6 +416,7 @@ void CleanMeteo(Weather * Meteo)
     free(PC_ratio);
     free(Al_Fe_ox);
     free(P_Olsen);
+    free(litho);
 }
 
 // ------ Clean the fertilization file ----

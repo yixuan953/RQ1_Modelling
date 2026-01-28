@@ -30,6 +30,7 @@ int GetMeteoData(Weather* meteo)
     int month_day_conter;
     float ****variable;
     float *data;
+    short *data_litho;
     
     // get mask
     // open file
@@ -118,38 +119,6 @@ int GetMeteoData(Weather* meteo)
     }
     free(data);
 
-    // // allocate HA
-    // if ((retval = nc_inq_varid(ncid, "HA", &varid)))
-    //     ERR(retval);
-    // HA = malloc(lon_length * sizeof(*HA));
-    // if(HA == NULL){
-    //     fprintf(stderr, "Could not malloc");
-    //     exit(1); 
-    // }
-    // for (j = 0; j < lon_length; j++) {
-    //     HA[j] = malloc(lat_length * sizeof(*HA[j]));
-    //     if(HA == NULL){
-    //         fprintf(stderr, "Could not malloc");
-    //         exit(1); 
-    //     }
-    // }
-    // // Fill HA
-    // data = malloc(lon_length * lat_length * sizeof(*data));
-    // if(data == NULL){
-    //     fprintf(stderr, "Could not malloc");
-    //     exit(1); 
-    // }
-    // fprintf(stdout, "Started loading forcing data for HA\n");
-    // if((retval = nc_get_var_float(ncid, varid, data)))
-    //     ERR(retval);
-    // for (k = 0; k < lat_length; k++) {
-    //     for (j = 0; j < lon_length; j++) {
-    //         HA[j][k] = data[k * lon_length + j];
-    //         // printf("%3d %3d %5.2f %5.2f %5.2f\n", j, k, HA[j][k], Latitude[k], Longitude[j]);
-    //     }
-    // }
-    // free(data);
-
     // allocate TSUM1
     if ((retval = nc_inq_varid(ncid, "TSUM1", &varid)))
        ERR(retval);
@@ -171,7 +140,7 @@ int GetMeteoData(Weather* meteo)
        fprintf(stderr, "Could not malloc");
        exit(1); 
     }
-   fprintf(stdout, "Started loading forcing data for TSUM1\n");
+    fprintf(stdout, "Started loading forcing data for TSUM1\n");
     if((retval = nc_get_var_float(ncid, varid, data)))
        ERR(retval);
     for (k = 0; k < lat_length; k++) {
@@ -349,7 +318,7 @@ int GetMeteoData(Weather* meteo)
     if(slope == NULL){
         fprintf(stderr, "Could not malloc");
         exit(1); 
-     }
+    }
     for (j = 0; j < lon_length; j++) {
     slope[j] = malloc(lat_length * sizeof(*slope[j]));
         if(slope == NULL){
@@ -532,8 +501,40 @@ int GetMeteoData(Weather* meteo)
              // printf("%3d %3d %5.2f %5.2f %5.2f\n", j, k, Climate_Zone[j][k], Latitude[k], Longitude[j]);
         }
     }
-    free(data);
-    
+    free(data);   
+
+    // allocate lithology
+    if ((retval = nc_inq_varid(ncid, "lithology", &varid)))
+        ERR(retval);
+    litho = malloc(lon_length * sizeof(*litho));
+    if(litho == NULL){
+        fprintf(stderr, "Could not malloc");
+        exit(1); 
+     }
+    for (j = 0; j < lon_length; j++) {
+    litho[j] = malloc(lat_length * sizeof(*litho[j]));
+        if(litho == NULL){
+            fprintf(stderr, "Could not malloc");
+            exit(1); 
+        }
+     }
+    // Fill lithology
+    data = malloc(lon_length * lat_length * sizeof(*data));
+    if(data == NULL){
+        fprintf(stderr, "Could not malloc");
+        exit(1); 
+     }
+    fprintf(stdout, "Started loading forcing data for lithology\n");
+    if((retval = nc_get_var_float(ncid, varid, data)))
+        ERR(retval);
+    for (k = 0; k < lat_length; k++) {
+        for (j = 0; j < lon_length; j++) {
+             litho[j][k] = data[k * lon_length + j];
+             // printf("%3d %3d %5.2f %5.2f %5.2f\n", j, k, litho[j][k], Latitude[k], Longitude[j]);
+        }
+    }
+    free(data);  
+
     // close file
     if ((retval = nc_close(ncid)))
        ERR(retval);

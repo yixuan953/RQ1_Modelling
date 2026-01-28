@@ -72,10 +72,10 @@ void CalPConcentration()
   {
     NPC->p_st.cP_inorg = Max_cP_inorg;
   } else {
-    NPC->p_st.cP_inorg = max(NPC->p_st.cP_inorg, Min_cP_inorg);
+    NPC->p_st.cP_inorg = min(max(NPC->p_st.cP_inorg, Min_cP_inorg), Max_cP_inorg);
   }
 
-  NPC->p_st.cP_tot = 1.1 * NPC->p_st.cP_inorg + 0.1 * exp(-NPC->p_st.cP_inorg); // Unit of cP_tot = g/m3
+  NPC->p_st.cP_tot = 1.1 * NPC->p_st.cP_inorg + 0.1 * exp(NPC->p_st.cP_inorg * (-1)); // Unit of cP_tot = g/m3
 }
 
 /* ---------------------------------------------------------------------------------------*/
@@ -84,7 +84,7 @@ void CalPConcentration()
 /* ---------------------------------------------------------------------------------------*/
 void CalPLeaching()
 {
-  NPC->p_rt.PLeaching = NPC->p_st.cP_tot * WatBal->rt.Percolation * 0.1; // Unit of cP_tot = g/m3
+  NPC->p_rt.PLeaching = NPC->p_st.cP_tot * WatBal->rt.Loss * 0.1; // Unit of cP_tot = g/m3
   NPC->p_st.PLeaching += NPC->p_rt.PLeaching;
 }
 
@@ -104,7 +104,7 @@ void CalPSurfRunoff()
 /* ---------------------------------------------------------------------------------------*/
 void CalPSubRunoff()
 {
-  NPC->p_rt.PSubRunoff = NPC->p_st.cP_tot * WatBal->rt.Loss * 0.1; // Unit of cP_tot = g/m3
+  NPC->p_rt.PSubRunoff = NPC->p_st.cP_tot * WatBal->rt.SubsurfaceRunoff * 0.1; // Unit of cP_tot = g/m3
   NPC->p_st.PSubRunoff += NPC->p_rt.PSubRunoff;
 }
 
@@ -163,7 +163,7 @@ void CalPdisL()
     NPC->p_rt.Pacc = NPC->P_fert_input + P_total_dep[Lon][Lat][Day] + NPC->decomp_rt.SOP_decomp - Crop->P_rt.Uptake - NPC->p_rt.PSurfRunoff - NPC->p_rt.PSubRunoff - NPC->p_rt.PLeaching;
    }
    
-   NPC->p_rt.PdisL = (100 * NPC->p_rt.Pacc/(MolarMassP * TopsoilDepth * bulk_density[Lon][Lat])) - NPC->p_rt.PdisS; // Unit: [mmol P/kg soil]
+   NPC->p_rt.PdisL = (10 * NPC->p_rt.Pacc/(MolarMassP * TopsoilDepth * bulk_density[Lon][Lat])) - NPC->p_rt.PdisS; // Unit: [mmol P/kg soil]
    NPC->p_st.Pacc += NPC->p_rt.Pacc;
 
 }

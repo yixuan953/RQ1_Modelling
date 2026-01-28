@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     Green *wipe;             
 
     // maize-160; wheat-270; rice-180; soybean-150
-    int CycleLength = 180; // Maximum growing days for each crop type
+    int CycleLength = 270; // Maximum growing days for each crop type
     int NumberOfFiles;     
     int Emergence;         
     int i;                 
@@ -206,7 +206,6 @@ int main(int argc, char **argv)
                 {
                     continue;
                 }
-       
 
                 // Initialize the time step of irrigation data
                 Irri_time_count = malloc(Meteo->nlon * sizeof(int *));
@@ -283,6 +282,7 @@ int main(int argc, char **argv)
                         if (Day <= 1){
 
                             CalSoilTexturePara();   // Calculate N, P cycling related parameters
+                            CalGrounwaterLeachingFactor(); // Calculate the groundwater leaching factor
 
                             CalMaxPPoolSize();      // Calculate the maximum P pool sizes for labile and stable P pool [mmol/kg]
                             CalMaxTSMD();           // Calculate the maximum daily topsoil mositure deficit [mm]
@@ -378,6 +378,7 @@ int main(int argc, char **argv)
                                 }
 
                                 else {       
+
                                     /* Record the date when crop is harvested */
                                     memset(&harvest_date, 0, sizeof(harvest_date));
                                     harvest_date.tm_year = current_date.tm_year;

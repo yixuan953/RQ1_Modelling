@@ -25,7 +25,8 @@ void Output_Annual(FILE *fp_ao)
                MeteoDay[Day],
                // Yield and growing days
                Crop->st.storage,
-               Crop->GrowthDay,
+               Crop->GrowthDay,                
+                
                // N balance
                NPC->n_st.N_decomp,NPC->n_st.N_dep,NPC->n_st.N_fixation,NPC->n_st.N_fert_input,
                NPC->n_st.Emission_NH3,NPC->n_st.Emission_N2O,NPC->n_st.Emission_NOx,NPC->n_st.N_loss_N2,

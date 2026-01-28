@@ -17,7 +17,6 @@ void CalSoilTexturePara()
     KL = 2000;
     miu_SDis = 0.000044;
     L_leaching_max = 0.5;
-    f_groundwater = 0.17;
    } 
    
    else if (texture_class[Lon][Lat] > 11)                                 // Sand
@@ -25,7 +24,6 @@ void CalSoilTexturePara()
     KL = 1000;
     miu_SDis = 0.000002;
     L_leaching_max = 1.0;
-    f_groundwater = 0.67;
    }
    
    else                                                                   // Loam
@@ -33,9 +31,9 @@ void CalSoilTexturePara()
     KL = 1500;
     miu_SDis = 0.000044;
     L_leaching_max = 0.75;
-    f_groundwater = 0.4;
    }
 }
+
 
 /* --------------------------------------------------------------------------------*/
 /*  function CalEmissionFactor()                                                   */
@@ -170,5 +168,31 @@ void CalLeachingFactors(){
       f_soc = 0.75;
    } else {
       f_soc = 0.5;
+   }
+}
+
+/* ---------------------------------------------------------------------------------*/
+/*  function CalGrounwaterLeachingFactor()                                          */
+/*  Purpose: Calculate how much leached N will go into the groundwater              */
+/* ---------------------------------------------------------------------------------*/
+
+void CalGrounwaterLeachingFactor(){
+    // f_groundwater_leaching
+   
+   f_groundwater = 0.5;
+   if (litho[Lon][Lat]==5)          // Unconsolidated sediments
+   {
+      f_groundwater = 1.0;
+   } else if (litho[Lon][Lat]==13){  // Evaporites
+      f_groundwater = 0.67;
+   } else if (litho[Lon][Lat]==12 || litho[Lon][Lat]==9 || litho[Lon][Lat]==6){ 
+      //Siliciclastic sedimentary rocks or Carbonate sedimentary rocks or Mixed sedimentary rocks
+      f_groundwater = 0.33;
+   } else if (litho[Lon][Lat]==1 || litho[Lon][Lat]==2 || litho[Lon][Lat]==3 || litho[Lon][Lat]==7 || litho[Lon][Lat]==8 || litho[Lon][Lat]==11 || litho[Lon][Lat]==13){
+      f_groundwater = 0.17;
+   } else if (litho[Lon][Lat]==4){ // Igneous rocks
+      f_groundwater = 0.067;
+   } else {                         // Water body, ice, no data
+      f_groundwater = 0.5;   
    }
 }

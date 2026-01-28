@@ -147,20 +147,18 @@ void RateCalulationWatBal() {
         /* Without surface storage */
         if (Site->InfRainDependent) WatBal->rt.Infiltration = 
                (1. - Site->NotInfiltrating * Afgen(Site->NotInfTB, &Rain[Lon][Lat][Day])) * 
-               Rain[Lon][Lat][Day] + WatBal->rt.Irrigation + WatBal->st.SurfaceStorage/ Step;
+               (Rain[Lon][Lat][Day] + WatBal->rt.Irrigation + WatBal->st.SurfaceStorage)/ Step;
         else
-            RINPRE = (1. - Site->NotInfiltrating) * Rain[Lon][Lat][Day] + 
-                WatBal->rt.Irrigation + WatBal->st.SurfaceStorage/ Step;
+            RINPRE = (1. - Site->NotInfiltrating) * (Rain[Lon][Lat][Day] + 
+                WatBal->rt.Irrigation + WatBal->st.SurfaceStorage)/ Step;
     }
     else 
     {
         /* Surface storage, infiltration limited by maximum percolation */
         /* rate root zone */
-        Available = WatBal->st.SurfaceStorage + (Rain[Lon][Lat][Day] * 
-                (1.-Site->NotInfiltrating) + WatBal->rt.Irrigation 
-                 - WatBal->rt.EvapSoil) * Step;
-        RINPRE = min(WatBal->ct.MaxPercolRTZ * Step, 
-                Available) / Step;
+        Available = WatBal->st.SurfaceStorage + (Rain[Lon][Lat][Day] + WatBal->rt.Irrigation)  * 
+                (1.-Site->NotInfiltrating) - WatBal->rt.EvapSoil * Step;
+        RINPRE = min(WatBal->ct.MaxPercolRTZ * Step, Available) / Step;
     }
 
 
@@ -171,7 +169,6 @@ void RateCalulationWatBal() {
         
         /* Equilibrium amount of soil moisture in rooted zone*/
         WaterEq = WatBal->ct.MoistureFC * AssRootDepth;
-        
         
         /* Percolation from rooted zone to subsoil equals amount of   */
         /* Excess moisture in rooted zone (not to exceed conductivity)*/
@@ -234,8 +231,7 @@ void RateCalulationWatBal() {
     }
             
     /* Rates of change in amounts of moisture W and WLOW */
-    WatBal->rt.RootZoneMoisture = -WatBal->rt.Transpiration - WatBal->rt.EvapSoil -  
-            WatBal->rt.Percolation + WatBal->rt.Infiltration;
+    WatBal->rt.RootZoneMoisture = WatBal->rt.Infiltration - WatBal->rt.Transpiration - WatBal->rt.EvapSoil - WatBal->rt.Percolation;
     WatBal->rt.MoistureLOW = WatBal->rt.Percolation - WatBal->rt.Loss;  
     
 }
@@ -253,7 +249,7 @@ void IntegrationWatBal()
     float WaterRootExt;
     float AssRootDepth = 10.;
     float BundHeight = 15.;
-    float DrainageHeight = 1.5;
+    float DrainageHeight = 2.0;
     
     WatBal->st.Transpiration += WatBal->rt.Transpiration;
     WatBal->st.EvapWater     += WatBal->rt.EvapWater;
@@ -264,6 +260,7 @@ void IntegrationWatBal()
     WatBal->st.Irrigation   += WatBal->rt.Irrigation;
 
     // Daily precipitation surplus and the accumulative surplus
+    // WatBal->rt.PreSurplus = WatBal->rt.Irrigation + Rain[Lon][Lat][Day] - WatBal->rt.Infiltration;
     WatBal->rt.PreSurplus = WatBal->rt.Irrigation + Rain[Lon][Lat][Day] - WatBal->rt.EvapWater - WatBal->rt.EvapSoil - WatBal->rt.Transpiration;
     WatBal->st.PreSurplus +=  WatBal->rt.PreSurplus;
 
@@ -293,6 +290,7 @@ void IntegrationWatBal()
     
     WatBal->st.SurfaceStorage = min(PreSurfaceStorage, Site->MaxSurfaceStorage);   
 
+    /* Surface runoff */
     WatBal->rt.Runoff = PreSurfaceStorage - WatBal->st.SurfaceStorage;
     WatBal->st.Runoff += WatBal->rt.Runoff;
     
@@ -306,9 +304,14 @@ void IntegrationWatBal()
     
     /* Total percolation and loss of water by deep leaching */
     WatBal->st.Percolation += WatBal->rt.Percolation * Step;
-    WatBal->st.Loss        += WatBal->rt.Loss * Step;     
+    WatBal->st.Loss        += WatBal->rt.Loss * Step; 
     
     WatBal->st.MoistureLOW += WatBal->rt.MoistureLOW;
+    
+    /* Subsurface runoff is generated when leaching is not exceeds the soil's capacity */
+    WatBal->rt.SubsurfaceRunoff = max(0, Rain[Lon][Lat][Day] + WatBal->rt.Irrigation - 
+            WatBal->rt.Runoff - WatBal->rt.EvapWater - WatBal->rt.EvapSoil - WatBal->rt.Transpiration - WatBal->rt.RootZoneMoisture - WatBal->rt.MoistureLOW - WatBal->rt.Loss);
+    WatBal->st.SubsurfaceRunoff += WatBal->rt.SubsurfaceRunoff;
    
     /* Change of root zone subsystem boundary                  */
     /* Calculation of amount of soil moisture in new root zone */

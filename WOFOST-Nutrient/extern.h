@@ -113,6 +113,7 @@ extern void CalEmissionFactor();    // Calculate the emission factors for N gase
 extern void CalResidueInput();      // Calculate the residue input (after harvest and before sowing) [kg/ha]
 extern void CalRunoffFactors();     
 extern void CalLeachingFactors();
+extern void CalGrounwaterLeachingFactor(); 
 
 // Fertilizer inputs
 extern void IfFertilization();      // If fertilization is applied before sowing

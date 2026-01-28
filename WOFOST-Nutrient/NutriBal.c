@@ -13,13 +13,11 @@
 
 void CalNutriAvail() {
 
-    float k_rate = 0.02;
-
     // The daily P availability is depend on the soil moisture [-], P concentration [g/m3] and maximum root depth in the soil solution
     NPC->st_P_avail = NPC->p_st.cP_inorg * WatBal->st.Moisture * Crop->prm.MaxRootingDepth * 0.1; 
 
     // The daily N availability is dependent on deposition, decomposition, and the unsed fertilizer input
-    NPC->st_N_avail = NPC->n_st.N_fert_input + NPC->N_decomp_pre * 0.3 + N_total_dep[Lon][Lat][Day] - Crop->N_st.Uptake;
+    NPC->st_N_avail = NPC->n_st.N_fert_input + NPC->N_decomp_pre + N_total_dep[Lon][Lat][Day] - Crop->N_st.Uptake;
 
 }
 
@@ -46,9 +44,10 @@ void CalGaseousEmissions() {
 /*------------------------------------------------------*/
 
 void CalNSurfRunoff() {
+    float f_rock = 0.8;    // Reduction factor for depth to rock (> 40 cm)
     NPC->n_st.N_loss_surf = (Manure_N_appRate[Lon][Lat][Crop->Seasons-1] 
         + Urea_inorg_N_appRate[Lon][Lat][Crop->Seasons-1] 
-        + Other_inorg_N_appRate[Lon][Lat][Crop->Seasons-1]) * L_runoff_max * min(f_precip_surf,f_texture); 
+        + Other_inorg_N_appRate[Lon][Lat][Crop->Seasons-1])*L_runoff_max*min(min(f_precip_surf,f_texture),f_rock); 
 }
 
 

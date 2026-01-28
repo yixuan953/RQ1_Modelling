@@ -1,7 +1,7 @@
 IZT    = 0
 IFUNRN = 0
 IDRAIN = 0
-SSMAX  = 0.3
+SSMAX  = 0.6
 WAV    = 20.000000
 ZTI    = 350.000000
 DD     = 0.000000

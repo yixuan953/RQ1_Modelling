@@ -213,6 +213,7 @@ typedef struct STATES {
         float WaterRootExt;
         float PreSurplus;
         float TSMD;
+        float SubsurfaceRunoff;
         } States;
         
 
@@ -230,6 +231,7 @@ typedef struct RATES {
         float Transpiration;
         float WaterRootExt;
         float PreSurplus;
+        float SubsurfaceRunoff;
         } Rates;
         
  
@@ -590,6 +592,7 @@ float **NC_ratio; // [-]
 float **PC_ratio; //[-]
 float **Al_Fe_ox; //[mmol/kg]
 float **P_Olsen; //[mmol/kg]
+short **litho; // nd su ev ss sm sc py va vi vb pa pi pb mt ig wb 
 // --------------------------------------------------------------------
 float **Altitude;
 float **AngstA;
