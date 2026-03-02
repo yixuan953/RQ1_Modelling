@@ -1,0 +1,8 @@
+/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/3_Scenarios/4_Fertilization_Red/4_1_Reduced_Fert/Rainfed/Inc_10/ 2005 2019 15 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Yangtze/Mask/Yangtze_secondrice_mask.nc
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  RESRATIO Rice_Return_Ratio
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  P_INORG Rice_P_application_rate
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  P_MANURE Rice_Manure_P_application_rate
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  N_OTHERINOG Rice_Inorg_N_application_rate
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  N_UREA Rice_Urea_N_application_rate
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  N_MANURE Rice_Manure_N_application_rate
+Yangtze_Secondrice_Fert_2005-2020_FixRate.nc  EFNOX Rice_EF_NOx

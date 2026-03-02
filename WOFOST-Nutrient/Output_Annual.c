@@ -6,7 +6,7 @@
 
 void header_AO(FILE *fp_ao)
 {
-    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,P_decomp,P_dep,P_fert,LabileP,StableP,PrecP,P_acc,P_surf,P_sub,P_leach,P_uptake\n");
+    fprintf(fp_ao,"Lat,Lon,Year,Day,Storage,GrowthDay,N_decomp,N_dep,N_fix,N_fert,NH3,N2O,NOx,N2,N_surf,N_sub,N_leach,N_uptake,N_grain,P_decomp,P_dep,P_fert,LabileP,StableP,PrecP,P_acc,P_surf,P_sub,P_leach,P_uptake,P_grain\n");
 }
 
 void Output_Annual(FILE *fp_ao)
@@ -15,10 +15,10 @@ void Output_Annual(FILE *fp_ao)
                 "%4.2f, %4.2d,"                       // Crop yield and GrowthDays
                 "%4.2f, %4.2f, %4.2f, %4.2f,"         // N inputs
                 "%4.3f, %4.3f, %4.3f, %4.3f,"         // N losses through gaseous emission
-                "%4.2f, %4.2f, %4.2f, %4.2f,"         // N losses through water fluxes and uptakes 
+                "%4.2f, %4.2f, %4.2f, %4.2f, %4.3f,"  // N losses through water fluxes, uptakes, and P in storage organ
                 "%4.2f, %4.2f, %4.4f, "               // P inputs
                 "%4.3f, %4.3f, %4.3f, %4.3f,"         // P pools
-                "%4.3f, %4.3f, %4.3f, %4.3f\n",       // P losses through water fluxes and uptakes 
+                "%4.3f, %4.3f, %4.3f, %4.3f, %4.3f\n",// P losses through water fluxes, uptakes, and P in storage organ
                Latitude[Lat],
                Longitude[Lon],
                MeteoYear[Day],
@@ -30,9 +30,9 @@ void Output_Annual(FILE *fp_ao)
                // N balance
                NPC->n_st.N_decomp,NPC->n_st.N_dep,NPC->n_st.N_fixation,NPC->n_st.N_fert_input,
                NPC->n_st.Emission_NH3,NPC->n_st.Emission_N2O,NPC->n_st.Emission_NOx,NPC->n_st.N_loss_N2,
-               NPC->n_st.N_loss_surf,NPC->n_st.N_loss_sub,NPC->n_st.N_loss_leach,Crop->N_st.Uptake,
+               NPC->n_st.N_loss_surf,NPC->n_st.N_loss_sub,NPC->n_st.N_loss_leach,Crop->N_st.Uptake,Crop->N_st.storage,
                // P dynamics
                NPC->p_st.P_decomp,NPC->p_st.P_dep,NPC->p_st.P_fert_input,
                NPC->p_st.LabileP,NPC->p_st.StableP,NPC->p_st.PrecP,NPC->p_st.Pacc,
-               NPC->p_st.PSurfRunoff,NPC->p_st.PSubRunoff,NPC->p_st.PLeaching,Crop->P_st.Uptake);
+               NPC->p_st.PSurfRunoff,NPC->p_st.PSubRunoff,NPC->p_st.PLeaching,Crop->P_st.Uptake,Crop->P_st.storage);
 }

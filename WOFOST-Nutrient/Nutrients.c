@@ -71,14 +71,23 @@ void NutrientDemand()
             fmax(Crop->rt.roots* Crop->N_st.Max_ro,0);
     Crop->N_rt.Demand_so =  fmax (Crop->N_st.Max_so *Crop->st.storage- Crop->N_st.storage, 0.)/Crop->prm.TCNT;
 
-    // Calculate the PN_ratio for leaves
-    PN_ratio_lv=Afgen(Crop->prm.P_MaxLeaves, &(Crop->st.Development))/Afgen(Crop->prm.N_MaxLeaves, &(Crop->st.Development));
+//     // Calculate the PN_ratio for leaves
+//     PN_ratio_lv=Afgen(Crop->prm.P_MaxLeaves, &(Crop->st.Development))/Afgen(Crop->prm.N_MaxLeaves, &(Crop->st.Development));
     
-    // P demand is also dimited by PN ratio in leaves and N demand 
-    Crop->P_rt.Demand_lv =  fmin(Crop->N_rt.Demand_lv*PN_ratio_lv, max (Crop->P_st.Max_lv *Crop->st.leaves - Crop->P_st.leaves, 0.))+ fmax(Crop->rt.leaves * Crop->P_st.Max_lv,0);
-    Crop->P_rt.Demand_st =  fmin(Crop->P_rt.Demand_lv*Crop->prm.P_MaxStems, max (Crop->P_st.Max_st *Crop->st.stems  - Crop->P_st.stems, 0.)) + fmax(Crop->rt.stems * Crop->P_st.Max_st,0);
-    Crop->P_rt.Demand_ro =  fmin(Crop->P_rt.Demand_lv*Crop->prm.P_MaxRoots, max (Crop->P_st.Max_ro *Crop->st.roots  - Crop->P_st.roots, 0.))  + fmax(Crop->rt.roots* Crop->P_st.Max_ro,0);
-    Crop->P_rt.Demand_so =  fmin(Crop->P_rt.Demand_lv*Crop->prm.Max_P_storage, max (Crop->P_st.Max_so *Crop->st.storage - Crop->P_st.storage, 0.))/Crop->prm.TCPT;
+//     // P demand is also dimited by PN ratio in leaves and N demand 
+//     Crop->P_rt.Demand_lv =  fmin(Crop->N_rt.Demand_lv*PN_ratio_lv, fmax (Crop->P_st.Max_lv *Crop->st.leaves - Crop->P_st.leaves, 0.)) + fmax(Crop->rt.leaves * Crop->P_st.Max_lv, 0);
+//     Crop->P_rt.Demand_st =  fmin(Crop->P_rt.Demand_lv*Crop->prm.P_MaxStems, fmax (Crop->P_st.Max_st *Crop->st.stems  - Crop->P_st.stems, 0.)) + fmax(Crop->rt.stems * Crop->P_st.Max_st,0);
+//     Crop->P_rt.Demand_ro =  fmin(Crop->P_rt.Demand_lv*Crop->prm.P_MaxRoots, fmax (Crop->P_st.Max_ro *Crop->st.roots  - Crop->P_st.roots, 0.))  + fmax(Crop->rt.roots * Crop->P_st.Max_ro,0);
+//     Crop->P_rt.Demand_so =  fmin(Crop->P_rt.Demand_lv*Crop->prm.Max_P_storage, fmax (Crop->P_st.Max_so *Crop->st.storage - Crop->P_st.storage, 0.))/Crop->prm.TCPT;
+
+    Crop->P_rt.Demand_lv =  fmax (Crop->P_st.Max_lv * Crop->st.leaves - Crop->P_st.leaves, 0.) +
+            fmax(Crop->rt.leaves * Crop->P_st.Max_lv,0);
+    Crop->P_rt.Demand_st =  fmax (Crop->P_st.Max_st * Crop->st.stems  - Crop->P_st.stems, 0.) +
+            fmax(Crop->rt.stems * Crop->P_st.Max_st,0);
+    Crop->P_rt.Demand_ro =  fmax (Crop->P_st.Max_ro * Crop->st.roots  - Crop->P_st.roots, 0.) +
+            fmax(Crop->rt.roots* Crop->P_st.Max_ro,0);
+    Crop->P_rt.Demand_so =  fmax (Crop->P_st.Max_so *Crop->st.storage- Crop->P_st.storage, 0.)/Crop->prm.TCPT;
+          
     
     Crop->K_rt.Demand_lv =  fmax (Crop->K_st.Max_lv *Crop->st.leaves - Crop->K_st.leaves, 0.) +
             fmax(Crop->rt.leaves * Crop->K_st.Max_lv,0);
@@ -101,7 +110,7 @@ void RateCalcultionNutrients()
     
     NutrientLoss();
     
-    SoilNutrientRates();  // Available Site->rt_N_tot (The old code)
+    // SoilNutrientRates();  // Available Site->rt_N_tot (The old code)
 
     CalNutriAvail();      // The new code to calculate the availability
     
@@ -111,7 +120,7 @@ void RateCalcultionNutrients()
     
     CropNutrientRates();
     
-    SoilNutrientRates();
+    // SoilNutrientRates();
     
     /* Calculate the nutrition index */
     NutritionINDX();    

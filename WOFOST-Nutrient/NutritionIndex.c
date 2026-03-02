@@ -59,7 +59,7 @@ void NutritionINDX()
     
     if ((P_opt_veg - P_res) > tiny)
     {
-        Crop->P_st.Indx = limit(tiny,1.0, (P_Veg - P_res)/(P_opt_veg - P_res));
+        Crop->P_st.Indx = limit(tiny, 1.0, (P_Veg - P_res)/(P_opt_veg - P_res));
     }
     else
     {

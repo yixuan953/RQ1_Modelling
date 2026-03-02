@@ -1,4 +1,4 @@
-/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/4_Analysis4Plotting/3_Fert_after_Red/Red_06/ 2005 2019 15 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/Mask/Rhine_winterwheat_mask.nc
+/lustre/nobackup/WUR/ESG/zhou111/3_RQ1_Model_Outputs/3_Scenarios/4_Fertilization_Red/4_1_Reduced_Fert/Irrigated/Red_06/ 2005 2019 15 /lustre/nobackup/WUR/ESG/zhou111/2_RQ1_Data/2_StudyArea/Rhine/Mask/Rhine_winterwheat_mask.nc
 Rhine_Wheat_Fert_2005-2020_FixRate.nc  RESRATIO Wheat_Return_Ratio
 Rhine_Wheat_Fert_2005-2020_FixRate.nc  P_INORG Wheat_P_application_rate
 Rhine_Wheat_Fert_2005-2020_FixRate.nc  P_MANURE Wheat_Manure_P_application_rate

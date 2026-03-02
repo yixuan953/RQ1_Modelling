@@ -281,8 +281,8 @@ int GetIrriData(Water_Irri* Irri)
                 for (l = 0; l < time_length; l++) {
 
                     // Read the irrigation data
-                    // Irrigation_Rate[j][k][l] = fmin(0.0, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // Without irrigation
-                    Irrigation_Rate[j][k][l] = fmin(50, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // With irrigation
+                    Irrigation_Rate[j][k][l] = fmin(0.0, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // Without irrigation
+                    // Irrigation_Rate[j][k][l] = fmin(50, roundz(0.1 * Irrigation_Rate[j][k][l], 2)); // With irrigation
 
                     }
             }

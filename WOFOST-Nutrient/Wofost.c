@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     Green *wipe;             
 
     // maize-160; wheat-270; rice-180; soybean-150
-    int CycleLength = 270; // Maximum growing days for each crop type
+    int CycleLength = 150; // Maximum growing days for each crop type
     int NumberOfFiles;     
     int Emergence;         
     int i;                 

@@ -33,7 +33,7 @@ float f_root;            // Reduction factor for root depth
 
 /* P pool calculations */
 float MaxLabileP;   // [mmol/kg]
-float MinLabileP;   // [mmol/kg], = 0.001
+float MinLabileP;   // [mmol/kg] = 0.001
 float MaxStableP;   // [mmol/kg]
 
 /* Soil texture related parameters */
@@ -42,7 +42,6 @@ float miu_SDis;   // The rate constant for the transfer from the stable P pool t
 
 /* Fertilization related parameters */
 float Org_frac; // Fraction of organic fertilizer inputs that cannot be uptaken by crops
-    
 float PN_ratio_lv;
 
 #endif	// NPCYCLING_H
